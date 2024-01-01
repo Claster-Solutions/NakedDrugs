@@ -4,7 +4,7 @@ import UserInfo from './components/userInfo'
 export default function Page() {
     return (
         <div>
-            <h1>Here you will see your user info</h1>
+            <h1 className=''>Here you will see your user info</h1>
             <UserInfo />
         </div>
     )
