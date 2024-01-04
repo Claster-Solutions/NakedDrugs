@@ -1,11 +1,15 @@
-import React from 'react'
+import SingIn from './components/singIn'
+import LogIn from './components/logIn'
 import UserInfo from './components/userInfo'
+import CurrentUser from './components/currentUser'
 
 export default function Page() {
     return (
         <div>
-            <h1 className=''>Here you will see your user info</h1>
+            {/* <SingIn /> */}
+            {/* <LogIn /> */}
             <UserInfo />
+            <CurrentUser />
         </div>
     )
 }

@@ -1,11 +1,11 @@
 import { DocumentData, DocumentSnapshot } from "firebase/firestore"
 
-const user = (doc: DocumentData): User => {
+const user = (doc: DocumentData): AppUser => {
     const data = doc.data();
     return {
-        id: doc.id,
-        name: data.name,
-        email: data.email
+        uid: doc.id,
+        email: data.email,
+        sentence: data.sentence
     }
 }
 

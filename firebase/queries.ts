@@ -1,8 +1,8 @@
-import { doc, getDoc, getDocs } from "firebase/firestore";
-import { usersCollection } from "./main";
+import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { auth, usersCollection } from "./main";
 import map from "./map";
 
-const getUserInfo = async (uid: string): Promise<User> => {
+const getUserInfo = async (uid: string): Promise<AppUser> => {
     const snap = await getDoc(doc(usersCollection, uid));
     if (!snap.exists()) {
         throw new Error("User not found");
@@ -10,7 +10,12 @@ const getUserInfo = async (uid: string): Promise<User> => {
     return map.user(snap);
 }
 
+const createUser = async (user: AppUser): Promise<void> => {
+    await setDoc(doc(usersCollection, user.uid), { ...user });
+}
+
 const fb = {
-    getUserInfo
+    getUserInfo,
+    createUser
 }
 export default fb;

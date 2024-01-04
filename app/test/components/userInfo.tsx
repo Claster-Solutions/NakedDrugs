@@ -1,20 +1,42 @@
-import React, { use } from 'react'
-import { cookies } from 'next/headers'
+'use client'
+import React, { useEffect, useState } from 'react'
 import fb from '@/firebase/queries'
-import { notFound } from 'next/navigation'
+import { auth } from '@/firebase/main'
 
-const UserInfo = async () => {
-    const cs = cookies()
-    const userId = cs.get('userId')?.value
-    if (!userId) return notFound()
+const UserInfo = () => {
+    const [user, setUser] = useState<AppUser | null>(null)
 
-    const user = await fb.getUserInfo(userId)
-    console.log(user)
+    useEffect(() => {
+        const getUser = async () => {
+            auth.onAuthStateChanged((user) => {
+                if (!user) return
+                console.log(user)
+
+                fb.getUserInfo(user.uid)
+                    .then((user) => {
+                        const newUser = {
+                            uid: user.uid,
+                            email: user.email,
+                            sentence: user.sentence,
+                        }
+                        setUser(newUser)
+                        console.log(newUser)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+            })
+        }
+
+        getUser()
+    }, [])
+
+    if (!user) return <p>Not logged in</p>
 
     return (
         <div>
-            <p>userId: {user.id}</p>
-            <p>user: {user.name}</p>
+            <p>userId: {user.uid}</p>
+            <p>sentence: {user.sentence}</p>
             <p>email: {user.email}</p>
         </div>
     )
