@@ -14,8 +14,8 @@ export default function HeroBanner() {
                 alt="banner kratom vesmír"
             ></img>
             <div className=" absolute bottom-20 left-0 right-0 top-0 flex items-end justify-center">
-                <div className="rounded-xl bg-white bg-opacity-40 p-4 text-2xl tracking-wider text-black">
-                    Same effect no taste
+                <div className="rounded-xl bg-white bg-opacity-0 p-4 text-5xl font-bold tracking-wider text-black">
+                    Buy me!
                 </div>
             </div>
         </Link>

@@ -5,7 +5,7 @@ import { WhyUsData } from './data'
 
 export default function WhyUsBanner() {
     return (
-        <div className=" flex flex-row gap-6 px-4 ">
+        <div className=" flex flex-row gap-6 px-10 ">
             {WhyUsData.map((item, index) => {
                 return (
                     <div className="flex flex-row items-center justify-center rounded-3xl bg-white p-4">
