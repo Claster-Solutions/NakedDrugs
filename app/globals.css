@@ -2,22 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+@keyframes glowing-hover {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     }
 }
 
-body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-        rgb(var(--background-start-rgb));
+.hover\:animate-glow:hover {
+    animation: glowing-hover 4s infinite; /* Adjust the duration as needed */
+}
+@keyframes glowing-hover2 {
+    0% {
+        box-shadow: 0 0 5px rgba(192, 255, 90, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(192, 255, 90, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(192, 255, 90, 0.8);
+    }
+}
+
+.hover\:animate-glow2:hover {
+    animation: glowing-hover2 2s infinite; /* Adjust the duration as needed */
+}
+
+.h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    padding-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+@media screen and (max-width: 768px) {
+    .h1 {
+        font-size: 2rem;
+    }
 }
