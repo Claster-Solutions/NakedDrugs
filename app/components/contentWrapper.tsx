@@ -27,7 +27,7 @@ const getStyle = (type: Props['type'], verticalPadding: boolean) => {
             case 'none':
                 return 'min-h-[70vh]'
             case 'default':
-                return 'px-6 md:px-36 min-h-[70vh] py-16'
+                return 'px-6 md:px-36 min-h-[70vh] py-8'
             case 'article':
                 return 'px-12 md:px-56 min-h-[70vh] py-16'
             default:

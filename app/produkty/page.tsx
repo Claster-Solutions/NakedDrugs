@@ -2,13 +2,14 @@ import ContentWrapper from '../components/contentWrapper'
 import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'
 import React from 'react'
-import Kratom from './kratom.webp'
+import Kratom from './product-placeholder.webp'
 import { Products } from './data'
+import Link from 'next/link'
 
 const Page = () => (
     <>
         <Navbar />
-        <ContentWrapper type="none">
+        <ContentWrapper type="default">
             <Component />
         </ContentWrapper>
         <Footer />
@@ -23,13 +24,16 @@ const Component = () => {
             <div className=" flex flex-row gap-8">
                 {Products.map((product, index) => {
                     return (
-                        <div className="w-1/4 overflow-hidden  rounded-3xl border-4 border-solid border-white  shadow-sm">
+                        <Link
+                            href={`/produkty/${product.id}`}
+                            className="w-1/4 overflow-hidden rounded-3xl border-4 border-solid border-white "
+                        >
                             <img
                                 src={Kratom.src}
                                 alt="obrázek produktu - kratom"
                                 className="object-cover"
                             />
-                        </div>
+                        </Link>
                     )
                 })}
             </div>
