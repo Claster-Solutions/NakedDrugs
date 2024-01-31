@@ -1,0 +1,7 @@
+'use client'
+import React from 'react'
+import fb from '@/app/tools/fireBase/queries'
+import { ChangeEvent, useEffect, useState } from 'react'
+import ObjectLinksList from './objectLinksList'
+import ObjectGeneral from './objectGeneral'
+import ObjectContentFormatter from './objectContentFromatter'

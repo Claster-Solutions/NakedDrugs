@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 'use client'
 import React, { useEffect, useState } from 'react'
 import fb from '@/firebase/queries'
 import { auth } from '@/firebase/main'
+=======
+import React, { use } from 'react'
+import { cookies } from 'next/headers'
+import fb from '@/app/tools/firebase/queries'
+import { notFound } from 'next/navigation'
+>>>>>>> Stashed changes
 
 const UserInfo = () => {
     const [user, setUser] = useState<AppUser | null>(null)
