@@ -1,10 +1,9 @@
-<<<<<<< Updated upstream
 type AppUser = {
-    uid: string;
-    email: string;
-    sentence: string;
+    uid: string
+    email: string
+    sentence: string
 }
-=======
+
 type User = {
     id: number
     name: string
@@ -69,4 +68,3 @@ type ContentList = {
     type: 401
     items: string[]
 }
->>>>>>> Stashed changes

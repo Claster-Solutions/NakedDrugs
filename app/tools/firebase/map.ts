@@ -1,13 +1,13 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore'
 
-const user = (doc: DocumentData): User => {
-    const data = doc.data()
-    return {
-        id: doc.id,
-        name: data.name,
-        email: data.email,
-    }
-}
+// const user = (doc: DocumentData): User => {
+//     const data = doc.data()
+//     return {
+//         id: doc.id,
+//         name: data.name,
+//         email: data.email,
+//     }
+// }
 
 const blogEvent = (
     doc: DocumentSnapshot<DocumentData, DocumentData>,
@@ -17,6 +17,7 @@ const blogEvent = (
     }
 
     return {
+        categoryName: doc.data().categoryName,
         id: doc.id,
         title: doc.data().title,
         date: doc.data().date.toDate(),
@@ -27,7 +28,7 @@ const blogEvent = (
 }
 
 const map = {
-    user,
+    // user,
     blogEvent,
 }
 export default map

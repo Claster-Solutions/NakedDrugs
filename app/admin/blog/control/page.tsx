@@ -1,6 +1,6 @@
 'use client'
 import ContentWrapper from '@/app/components/contentWrapper'
-import ObjectRoot from './conmponents/objectRoot'
+import ObjectRoot from './components/objectRoot'
 
 const Page = () => (
     <>

@@ -12,13 +12,13 @@ import {
     deleteDoc,
 } from 'firebase/firestore'
 
-const getUserInfo = async (uid: string): Promise<User> => {
-    const snap = await getDoc(doc(usersCollection, uid))
-    if (!snap.exists()) {
-        throw new Error('User not found')
-    }
-    return map.user(snap)
-}
+// const getUserInfo = async (uid: string): Promise<User> => {
+//     const snap = await getDoc(doc(usersCollection, uid))
+//     if (!snap.exists()) {
+//         throw new Error('User not found')
+//     }
+//     return map.user(snap)
+// }
 const getAllBlogs = async (): Promise<AllBlogs[]> => {
     const snap = await getDocs(blogCollection)
 
@@ -55,8 +55,38 @@ const getAllBlogs = async (): Promise<AllBlogs[]> => {
 
     return result
 }
+const getBlog = async (id: string): Promise<BlogEvent> => {
+    const snap = await getDoc(doc(blogCollection, id))
+    const mapped = map.blogEvent(snap)
+    if (mapped === undefined) {
+        throw new Error('Event not found')
+    }
+    return mapped
+}
+
+const deleteBlog = async (id: string): Promise<void> => {
+    await deleteDoc(doc(blogCollection, id))
+}
+
+const setBlog = async (event: BlogEvent): Promise<void> => {
+    console.log(event)
+    await setDoc(doc(blogCollection, event.id), { ...event, updatedAt: new Date() })
+    console.log('done')
+}
+
+const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
+    const snap = await getDocs(
+        query(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
+    )
+    const mapped = snap.docs.map((doc) => map.blogEvent(doc))
+    return mapped.filter((event) => event !== undefined) as BlogEvent[]
+}
 const fb = {
-    getUserInfo,
+    //   getUserInfo,
+    getBlog,
+    deleteBlog,
+    setBlog,
+    getLastBlogLimited,
     getAllBlogs,
 }
 export default fb

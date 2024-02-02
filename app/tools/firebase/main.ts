@@ -24,7 +24,3 @@ export const firestore = getFirestore(app)
 export const usersCollection = collection(firestore, 'users')
 // blog collection
 export const blogCollection = collection(firestore, 'dq')
-
-
-
-
