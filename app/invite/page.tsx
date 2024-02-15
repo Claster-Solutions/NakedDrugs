@@ -2,25 +2,53 @@
 import { auth } from '@/firebase/main'
 import be from '@/firebase/queries'
 import {
-    createUserWithEmailAndPassword,
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
     signInWithPopup,
-    fetchSignInMethodsForEmail,
 } from 'firebase/auth'
 import { notFound } from 'next/navigation'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import scripts from '../tools/scripts/scripts'
 
 export default function Page() {
+    const [invitor, setInvitor] = useState<User | null>()
+    const [inviteError, setInviteError] = useState<string | null>(null)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState<boolean | null>(null)
+    const [loginError, setLoginError] = useState<boolean | null>(null)
 
     const provider = new GoogleAuthProvider()
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            const urlParams = new URLSearchParams(window.location.search)
+            const userId = urlParams.get('user')
+            if (!userId) {
+                setInviteError('No user id')
+                return
+            }
+
+            const user = await be.getUser(userId)
+            if (!user) {
+                setInviteError('User not found')
+                return
+            }
+
+            setInvitor(user)
+        }
+
+        fetchUser()
+    })
+
     const handleSubmit = async () => {
         if (!scripts.validateEmailPasswordFields(email, password)) {
-            setError(true)
+            setLoginError(true)
+            return
+        }
+
+        if (!invitor) {
+            setInviteError('No invitor')
             return
         }
 
@@ -37,18 +65,26 @@ export default function Page() {
 
                 //? check if user exists in the database and create if not
                 const user = await be.getUser(uid)
-                if (!user) {
-                    await be.createUser(uid, email, name, photoURL)
+                if (user) {
+                    setInviteError('User already exists')
+                    return
+                } else {
+                    await be.createUser(uid, email, name, photoURL, invitor?.id)
                 }
 
                 window.location.href = '/'
             })
             .catch((error) => {
-                setError(true)
+                setLoginError(true)
             })
     }
 
     const handleGoogleSignIn = () => {
+        if (!invitor) {
+            setInviteError('No invitor')
+            return
+        }
+
         signInWithPopup(auth, provider)
             .then(async (userCredential) => {
                 const uid = userCredential.user.uid
@@ -62,8 +98,11 @@ export default function Page() {
 
                 //? check if user exists in the database and create if not
                 const user = await be.getUser(uid)
-                if (!user) {
-                    await be.createUser(uid, email, name, photoURL)
+                if (user) {
+                    setInviteError('User already exists')
+                    return
+                } else {
+                    await be.createUser(uid, email, name, photoURL, invitor?.id)
                 }
 
                 window.location.href = '/'
@@ -77,8 +116,17 @@ export default function Page() {
             })
     }
 
+    if (inviteError) {
+        return <p>{inviteError}</p>
+    }
+
     return (
         <div className="flex h-screen w-screen items-center justify-center">
+            <div>
+                <h1>You was invited by {invitor?.name}</h1>
+                <p>Invite user: {invitor?.id}</p>
+            </div>
+
             <div className="flex flex-col bg-gray p-3">
                 <h1 className="text-3xl font-bold">Here you can sign-in</h1>
                 <input
@@ -95,7 +143,7 @@ export default function Page() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {error && <p className="text-red-500">Invalid credentials</p>}
+                {loginError && <p className="text-red-500">Invalid credentials</p>}
                 <button onClick={handleSubmit}>Submit</button>
 
                 <button onClick={handleGoogleSignIn}>Sign-in with Google</button>

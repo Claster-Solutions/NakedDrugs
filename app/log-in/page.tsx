@@ -1,51 +1,68 @@
 'use client'
 import { auth } from '@/firebase/main'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import React, { useEffect, useState } from 'react'
+import be from '@/firebase/queries'
+import {
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+} from 'firebase/auth'
+import { notFound } from 'next/navigation'
+import React, { useContext, useEffect, useState } from 'react'
+import scripts from '../tools/scripts/scripts'
 
 export default function Page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState<boolean | null>(null)
 
-    const [authenticated, setAuthenticated] = useState<boolean | null>(null)
+    const provider = new GoogleAuthProvider()
 
-    useEffect(() => {
-        setAuthenticated(sessionStorage.getItem('authenticated') === 'true')
-    }, [])
-
-    const validateFields = () => {
-        if (email === '' || password === '') {
+    const handleSubmit = async () => {
+        if (!scripts.validateEmailPasswordFields(email, password)) {
             setError(true)
-            return false
-        }
-        return true
-    }
-
-    const handleSunmit = async () => {
-        if (!validateFields()) {
             return
         }
 
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                sessionStorage.setItem('authenticated', 'true')
-                setAuthenticated(true)
-            })
+            .then((userCredential) => {})
             .catch((error) => {
                 setError(true)
             })
+    }
 
-        
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, provider)
+            .then(async (userCredential) => {
+                const uid = userCredential.user.uid
+                const email = userCredential.user.email
+                const name = userCredential.user.displayName || userCredential.user.email
+                const photoURL = userCredential.user.photoURL || ''
+
+                if (!uid || !email || !name) {
+                    notFound()
+                }
+
+                //? check if user exists in the database and create if not
+
+                const user = await be.getUser(uid)
+                if (!user) {
+                    await be.createUser(uid, email, name, photoURL)
+                }
+
+                window.location.href = '/'
+            })
+            .catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                const email = error.email
+                const credential = GoogleAuthProvider.credentialFromError(error)
+                console.log(errorCode, errorMessage, email, credential)
+            })
     }
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
             <div className="flex flex-col bg-gray p-3">
-                {
-                    authenticated && <p className="text-green-500">You are authenticated</p>
-                }
-
                 <h1 className="text-3xl font-bold">Here you can log-in</h1>
                 <input
                     type="text"
@@ -62,7 +79,9 @@ export default function Page() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 {error && <p className="text-red-500">Invalid credentials</p>}
-                <button onClick={handleSunmit}>Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
+
+                <button onClick={handleGoogleSignIn}>Log-in with Google</button>
             </div>
         </div>
     )

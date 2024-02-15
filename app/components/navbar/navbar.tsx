@@ -6,9 +6,12 @@ import Image from 'next/image'
 import Logo from '@/public/brand/emoji-logo.jpg'
 import Link from 'next/link'
 import ContentWrapper from '../contentWrapper'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { mainPagesList } from './data'
 import NavbarBtn from './button'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/firebase/main'
+import User from './user'
 
 const Navbar = () => (
     <div className="z-50">
@@ -47,6 +50,8 @@ const Desktop = () => {
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
+
+                    <User/>
                 {mainPagesList.map((page, index) => {
                     return <NavbarBtn key={index} title={page.name} link={page.url} />
                 })}

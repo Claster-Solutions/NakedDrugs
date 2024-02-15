@@ -1,13 +1,21 @@
-type AppUser = {
-    uid: string
+type User = {
+    id: string
     email: string
-    sentence: string
+    name: string
+    photoURL: string
+    card: Item[]
+    liked: string[]
+    referals: string[]
+    referal: string
+    purchasesCount: number
 }
 
-type User = {
-    id: number
+type Item = {
+    id: string
     name: string
-    email: string
+    description: string
+    price: number
+    image: string
 }
 
 /*content Formater */
