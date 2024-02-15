@@ -77,12 +77,12 @@ const ObjectRoot = () => {
         await fb.deleteBlog(object.id)
         alert('Akce byla úspěšně smazána.')
         localStorage.removeItem('eventId')
-        window.location.href = '/admin/akce-a-galerie'
+        window.location.href = '/admin/blog'
     }
 
     const handleBackButton = () => {
         localStorage.removeItem('eventId')
-        window.location.href = '/admin/akce-a-galerie'
+        window.location.href = '/admin/blog'
     }
 
     return (

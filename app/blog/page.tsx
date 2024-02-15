@@ -1,6 +1,8 @@
 import ContentWrapper from '../components/contentWrapper'
 import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'
+import ContentFormatter from '../contentFormatter/contentFormatter'
+import fb from '../tools/firebase/queries'
 
 const Page = () => (
     <>
@@ -13,14 +15,17 @@ const Page = () => (
 )
 export default Page
 
-const Component = () => {
+const Component = async () => {
+    const blog = await fb.getAllBlogs()
+
     return (
         <div>
-            <div>
-                <img src="" alt="" />
-                <h2></h2>
-                <p></p>
-            </div>
+            <h1>BLOG</h1>
+            {blog.map((blog, index) => (
+                <div key={index}>
+                    <h2>{blog.categoryName}</h2>
+                </div>
+            ))}
         </div>
     )
 }

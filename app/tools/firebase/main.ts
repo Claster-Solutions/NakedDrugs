@@ -23,4 +23,4 @@ const app = initializeApp(firebaseConfig)
 export const firestore = getFirestore(app)
 export const usersCollection = collection(firestore, 'users')
 // blog collection
-export const blogCollection = collection(firestore, 'dq')
+export const blogCollection = collection(firestore, 'blogs')

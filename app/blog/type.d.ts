@@ -9,6 +9,6 @@ type BlogEvent = {
     title: string
     thrumbnailImageId: string
     description: string
-    date: Date
+    //  date: Date
     content: Content[]
 }
