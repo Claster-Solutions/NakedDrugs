@@ -67,6 +67,22 @@ const Page = async ({ params }: { params: { produktId: string } }) => (
 )
 export default Page
 
+const validateOrder = (): boolean => {
+    if (true) {
+        return true
+    }
+}
+
+const handleSubmit = () => {
+    const isValid = validateOrder()
+
+    if (isValid) {
+        alert('Objednávka byla úspěšně odeslána')
+    } else {
+        alert('Objednávka nebyla odeslána')
+    }
+}
+
 interface Props {
     produktId: string
 }
@@ -95,7 +111,11 @@ const Component = async (p: Props) => {
                 <Dropdown price={produkt.price} />
                 <p className=" text-sm font-light">{produkt.description} </p>
 
-                <Amount />
+                <div className="flex flex-row">
+                    <Amount />
+
+                    {/* <button onClick={handleSubmit}>submit</button> */}
+                </div>
             </div>
         </div>
     )

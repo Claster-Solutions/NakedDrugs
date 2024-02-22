@@ -16,16 +16,21 @@ const Page = () => (
 export default Page
 
 const Component = async () => {
-    const blog = await fb.getAllBlogs()
+    const allblog = await fb.getAllBlogs()
 
     return (
         <div>
             <h1>BLOG</h1>
-            {blog.map((blog, index) => (
+            {allblog.map((blog, index) => (
+                <div></div>
+                //return <h2 key={index}>{blog.categoryName}</h2>
+            ))}
+
+            {/* {blog.map((blog, index) => (
                 <div key={index}>
                     <h2>{blog.categoryName}</h2>
                 </div>
-            ))}
+            ))} */}
         </div>
     )
 }

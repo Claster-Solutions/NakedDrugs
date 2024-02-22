@@ -9,6 +9,14 @@ import { DocumentData, DocumentSnapshot } from 'firebase/firestore'
 //     }
 // }
 
+const user = (doc: DocumentData): AppUser => {
+    const data = doc.data()
+    return {
+        uid: doc.id,
+        email: data.email,
+        sentence: data.sentence,
+    }
+}
 const blogEvent = (
     doc: DocumentSnapshot<DocumentData, DocumentData>,
 ): BlogEvent | undefined => {
@@ -28,7 +36,7 @@ const blogEvent = (
 }
 
 const map = {
-    // user,
+    user,
     blogEvent,
 }
 export default map

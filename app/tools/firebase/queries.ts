@@ -81,8 +81,22 @@ const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
     const mapped = snap.docs.map((doc) => map.blogEvent(doc))
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
 }
+
+const getUserInfo = async (uid: string): Promise<AppUser> => {
+    const snap = await getDoc(doc(usersCollection, uid))
+    if (!snap.exists()) {
+        throw new Error('User not found')
+    }
+    return map.user(snap)
+}
+
+const createUser = async (user: AppUser): Promise<void> => {
+    await setDoc(doc(usersCollection, user.uid), { ...user })
+}
+
 const fb = {
-    //   getUserInfo,
+    getUserInfo,
+    createUser,
     getBlog,
     deleteBlog,
     setBlog,
