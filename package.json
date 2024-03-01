@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "compress.js": "^1.2.2",
         "firebase": "^10.7.1",
         "next": "14.0.4",
         "react": "^18",

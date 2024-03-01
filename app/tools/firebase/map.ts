@@ -8,13 +8,18 @@ import { DocumentData, DocumentSnapshot } from 'firebase/firestore'
 //         email: data.email,
 //     }
 // }
-
-const user = (doc: DocumentData): AppUser => {
+const user = (doc: DocumentData): User => {
     const data = doc.data()
     return {
-        uid: doc.id,
+        id: doc.id,
         email: data.email,
-        sentence: data.sentence,
+        name: data.name,
+        photoURL: data.photoURL,
+        card: data.card,
+        liked: data.liked,
+        referals: data.referals,
+        referal: data.referal,
+        purchasesCount: data.purchasesCount,
     }
 }
 const blogEvent = (

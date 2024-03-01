@@ -1,4 +1,5 @@
-import { blogCollection, usersCollection } from './main'
+import { ref, uploadBytes } from 'firebase/storage'
+import { blogCollection, firestorage, usersCollection } from './main'
 import map from './map'
 import {
     doc,
@@ -19,6 +20,42 @@ import {
 //     }
 //     return map.user(snap)
 // }
+
+const getUser = async (uid: string): Promise<User | null> => {
+    const snap = await getDoc(doc(usersCollection, uid))
+    if (!snap.exists()) {
+        return null
+    }
+    return map.user(snap)
+}
+
+const createUser = async (
+    uid: string,
+    email: string,
+    name?: string,
+    photoURL?: string,
+    referal?: string,
+): Promise<void> => {
+    const newUser: User = {
+        id: uid,
+        email,
+        name: name || email,
+        photoURL: photoURL || '',
+        referal: referal || '',
+        purchasesCount: 0,
+
+        card: [],
+        liked: [],
+        referals: [],
+    }
+
+    await setDoc(doc(usersCollection, newUser.id), newUser)
+}
+
+const getImage = (id: string): string => {
+    return 'image avalible after push'
+    //return `www.oururl.com/images?id=${id}`
+}
 const getAllBlogs = async (): Promise<AllBlogs[]> => {
     const snap = await getDocs(blogCollection)
 
@@ -55,6 +92,11 @@ const getAllBlogs = async (): Promise<AllBlogs[]> => {
 
     return result
 }
+
+const setImage = async (file: Blob, id: string): Promise<void> => {
+    const storageRef = ref(firestorage, `images/${id}`)
+    await uploadBytes(storageRef, file)
+}
 const getBlog = async (id: string): Promise<BlogEvent> => {
     const snap = await getDoc(doc(blogCollection, id))
     const mapped = map.blogEvent(snap)
@@ -82,25 +124,19 @@ const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
 }
 
-const getUserInfo = async (uid: string): Promise<AppUser> => {
-    const snap = await getDoc(doc(usersCollection, uid))
-    if (!snap.exists()) {
-        throw new Error('User not found')
-    }
-    return map.user(snap)
-}
-
-const createUser = async (user: AppUser): Promise<void> => {
-    await setDoc(doc(usersCollection, user.uid), { ...user })
-}
+// const createUser = async (user: AppUser): Promise<void> => {
+//     await setDoc(doc(usersCollection, user.uid), { ...user })
+// }
 
 const fb = {
-    getUserInfo,
+    getImage,
+    getUser,
     createUser,
     getBlog,
     deleteBlog,
     setBlog,
     getLastBlogLimited,
     getAllBlogs,
+    setImage,
 }
 export default fb

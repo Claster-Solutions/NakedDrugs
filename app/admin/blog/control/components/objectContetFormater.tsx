@@ -1,5 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import Paragraph from './contentComponents/paragraph'
+import List from './contentComponents/list'
+import Image from './contentComponents/image'
 
 interface Props {
     object: BlogEvent
@@ -146,15 +148,15 @@ const items: Item[] = [
             text: '',
         },
     },
-    // {
-    //     title: 'obraz',
-    //     type: 300,
-    //     newItem: {
-    //         type: 300,
-    //         id: '',
-    //         alt: '',
-    //     },
-    // },
+    {
+        title: 'obrázek',
+        type: 300,
+        newItem: {
+            type: 300,
+            id: '',
+            alt: '',
+        },
+    },
     // {
     //     title: 'sada obrázků',
     //     type: 301,
@@ -163,15 +165,15 @@ const items: Item[] = [
     //         images: [],
     //         alt: '',
     //     },
-    // },
-    // // {
-    //     title: 'seznam',
-    //     type: 401,
-    //     newItem: {
-    //         type: 401,
-    //         items: [],
-    //     },
-    // },
+    //},
+    {
+        title: 'seznam',
+        type: 401,
+        newItem: {
+            type: 401,
+            items: [],
+        },
+    },
     // {
     //     title: 'seznam varování',
     //     type: 400,
@@ -220,14 +222,14 @@ const ContentItem = (p: ContentItemProps) => {
                 />
             )
 
-        // case 300:
-        //     return (
-        //         <Image
-        //             index={p.index}
-        //             object={p.actionEvent}
-        //             setObject={p.setActionEvent}
-        //         />
-        //     )
+        case 300:
+            return (
+                <Image
+                    index={p.index}
+                    object={p.actionEvent}
+                    setObject={p.setActionEvent}
+                />
+            )
 
         // case 301:
         //     return (
@@ -247,14 +249,14 @@ const ContentItem = (p: ContentItemProps) => {
         //         />
         //     )
 
-        // case 401:
-        //     return (
-        //         <List
-        //             index={p.index}
-        //             object={p.actionEvent}
-        //             setObject={p.setActionEvent}
-        //         />
-        //     )
+        case 401:
+            return (
+                <List
+                    index={p.index}
+                    object={p.actionEvent}
+                    setObject={p.setActionEvent}
+                />
+            )
 
         //* Add new content type here
     }

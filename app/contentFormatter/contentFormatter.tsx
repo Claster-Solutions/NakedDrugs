@@ -1,5 +1,7 @@
 import ContentHeader1 from './components/ContentHeader1'
+import ContentList from './components/ContentList'
 import ContentParagraph from './components/ContentParagraph'
+import ContentSingleImage from './components/ContentSingleImage'
 
 interface Props {
     content: Content[]
@@ -23,5 +25,9 @@ const Content = (content: Content) => {
 
         case 200:
             return <ContentParagraph data={content} />
+        case 300:
+            return <ContentSingleImage data={content} />
+        case 401:
+            return <ContentList data={content} />
     }
 }

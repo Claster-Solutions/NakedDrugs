@@ -3,6 +3,8 @@ import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'
 import ContentFormatter from '../contentFormatter/contentFormatter'
 import fb from '../tools/firebase/queries'
+import BlogCard from './components/blogCard'
+import YearDropdown from './components/yearDropdown'
 
 const Page = () => (
     <>
@@ -22,15 +24,11 @@ const Component = async () => {
         <div>
             <h1>BLOG</h1>
             {allblog.map((blog, index) => (
-                <div></div>
-                //return <h2 key={index}>{blog.categoryName}</h2>
+                <>
+                    <YearDropdown key={index} blogs={blog} index={0} />
+                    <div className="bg-primary-blue_line h-[0.5px] w-full md:w-4/12" />
+                </>
             ))}
-
-            {/* {blog.map((blog, index) => (
-                <div key={index}>
-                    <h2>{blog.categoryName}</h2>
-                </div>
-            ))} */}
         </div>
     )
 }

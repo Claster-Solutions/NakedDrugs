@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { mainPagesList } from './data'
 import NavbarBtn from './button'
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '@/firebase/main'
+//import { auth } from '@/firebase/main'
 import User from './user'
 
 const Navbar = () => (
@@ -51,7 +51,7 @@ const Desktop = () => {
                     />
                 </Link>
 
-                    <User/>
+                <User />
                 {mainPagesList.map((page, index) => {
                     return <NavbarBtn key={index} title={page.name} link={page.url} />
                 })}

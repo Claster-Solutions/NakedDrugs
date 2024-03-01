@@ -1,15 +1,15 @@
 'use client'
-import { auth } from '@/firebase/main'
-import be from '@/firebase/queries'
-import {
-    createUserWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-    fetchSignInMethodsForEmail,
-} from 'firebase/auth'
-import { notFound } from 'next/navigation'
-import React, { use, useEffect, useState } from 'react'
+
+import { useState } from 'react'
 import scripts from '../tools/scripts/scripts'
+import { notFound } from 'next/navigation'
+import { auth } from '../tools/firebase/main'
+import fb from '../tools/firebase/queries'
+import {
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+} from 'firebase/auth'
 
 export default function Page() {
     const [email, setEmail] = useState('')
@@ -36,9 +36,9 @@ export default function Page() {
                 }
 
                 //? check if user exists in the database and create if not
-                const user = await be.getUser(uid)
+                const user = await fb.getUser(uid)
                 if (!user) {
-                    await be.createUser(uid, email, name, photoURL)
+                    await fb.createUser(uid, email, name, photoURL)
                 }
 
                 window.location.href = '/'
@@ -61,9 +61,9 @@ export default function Page() {
                 }
 
                 //? check if user exists in the database and create if not
-                const user = await be.getUser(uid)
+                const user = await fb.getUser(uid)
                 if (!user) {
-                    await be.createUser(uid, email, name, photoURL)
+                    await fb.createUser(uid, email, name, photoURL)
                 }
 
                 window.location.href = '/'
