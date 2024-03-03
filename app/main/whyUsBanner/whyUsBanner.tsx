@@ -1,22 +1,35 @@
-import React from 'react'
-
-import GiftIcon from '@/public/icons/gift.png'
+'use client'
+import React, { useState } from 'react'
+import ProductImage from '@/public/images/kratom_placeholder.webp'
 import { WhyUsData } from './data'
 
 export default function WhyUsBanner() {
-    return (
-        <div className=" flex flex-col gap-6 px-20 md:flex-row ">
-            {WhyUsData.map((item, index) => {
-                return (
-                    <div className="flex flex-row items-center justify-center rounded-3xl p-4 hover:shadow-2xl">
-                        <img className=" h-20" src={GiftIcon.src} alt="ikona dárek" />
-                        <div className="flex flex-col gap-4 p-4 pt-0">
-                            <h3>{item.title}</h3>
-                            <p>{item.text}</p>
-                        </div>
-                    </div>
-                )
-            })}
-        </div>
-    )
+
+
+  const [hoveredDiv, setHoveredDiv] = useState<number | null>(null);
+
+
+  return (
+    <div className=" flex flex-col justify-evenly">
+
+      <p className='mx-[7%] text-3xl font-bold'>🖤 Nejoblíbenější 🖤</p>
+      <div className='flex flex-col justify-evenly p-8  md:flex-row'>
+        {WhyUsData.map((item, index) => {
+          return (
+
+            <div key={index} onMouseEnter={() => setHoveredDiv(index)} onMouseLeave={() => setHoveredDiv(null)} className="mx-10 mt-2 flex min-w-60 flex-col items-center overflow-hidden bg-white shadow-xs">
+              <div className="">
+                <div style={{ boxShadow: hoveredDiv === index ? '0px 5px 10px 0px rgba(0, 0, 0, 0.5)' : '', }} className='bg-primary-hades_light m-4 rounded-lg min-w-80 min-h-80'>
+                </div>
+                <h3 className='font-bold uppercase py-2 mx-4 text-md'>{item.title}</h3>
+                <p className=' mx-4'>{item.text}</p>
+              </div>
+            </div>
+          )
+        })}
+
+      </div>
+
+    </div>
+  )
 }

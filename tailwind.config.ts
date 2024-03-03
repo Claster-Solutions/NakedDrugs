@@ -28,7 +28,9 @@ const config: Config = {
         },
         colors: {
             primary: {
-                gray_background: '#f0f0f2',
+                hades_main: '#323232',
+                hades: '#939393',
+                hades_light: '#E9E9E9',
                 //will add when we decide on color theme
             },
 

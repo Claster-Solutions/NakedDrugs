@@ -26,7 +26,7 @@ const Component = async () => {
       <div className=" flex flex-row gap-8">
         {products.map((product, index) => {
           return (
-            <Link
+            <Link key={index}
               href={`/produkty/${product.id}`}
               className=" w-1/4 overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl"
             >

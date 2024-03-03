@@ -13,7 +13,6 @@ import {
   deleteDoc,
 } from 'firebase/firestore'
 import { Product } from '@/app/produkty/data'
-import { waitForDebugger } from 'inspector'
 
 // const getUserInfo = async (uid: string): Promise<User> => {
 //     const snap = await getDoc(doc(usersCollection, uid))
