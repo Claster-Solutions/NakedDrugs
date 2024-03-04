@@ -2,6 +2,8 @@
 import { auth } from '@/app/tools/firebase/main'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
+import ProfileIcon from '@/public/icons/user.svg'
+import Link from 'next/link'
 
 export default function User() {
     const [userName, setUserName] = useState('')
@@ -23,26 +25,49 @@ export default function User() {
     }, [])
 
     if (authenticated === null) {
-        return <p className="bg-yellow">Loading...</p>
+        return (
+            <Link className="flex flex-row items-center font-light" href={'/signIn'}>
+                <img src={ProfileIcon.src} />
+                <p>Sign In</p>
+            </Link>
+        )
     }
-
     if (authenticated === false) {
-        return <p className="bg-red">Not authenticated</p>
-    }
-
-    return (
-        <div className="bg-green">
-            <p>{userEmail}</p>
-            <p>{userName}</p>
-            <img src={userPhotoURL} alt="User photo" width={18} height={18} />
-            <button
-                onClick={() => {
-                    //? log out
-                    signOut(auth)
-                }}
+        return (
+            <Link
+                className="flex flex-row items-center gap-2 font-light"
+                href={'/signIn'}
             >
-                Log out
-            </button>
-        </div>
+                <img src={ProfileIcon.src} />
+                <p>Sign In</p>
+            </Link>
+        )
+    }
+    return (
+        <Link href={'/profile'} className=" flex flex-row gap-2 p-2">
+            <img
+                src={userPhotoURL}
+                alt="User photo"
+                className="rounded-xl"
+                width={20}
+                height={20}
+            />
+            <p className="text-xs font-light">{userName}</p>
+        </Link>
     )
+    /*return (
+    <div className="bg-green">
+      <p>{userEmail}</p>
+      <p>{userName}</p>
+      <img src={userPhotoURL} alt="User photo" width={18} height={18} />
+      <button
+        onClick={() => {
+          //? log out
+          signOut(auth)
+        }}
+      >
+        Log out
+      </button>
+    </div>
+  )*/
 }

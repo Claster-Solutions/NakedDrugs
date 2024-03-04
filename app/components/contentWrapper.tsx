@@ -10,11 +10,7 @@ interface Props {
 export default function ContentWrapper(p: Props) {
     const verticalPadding = p.verticalPadding ?? true
     return (
-        <div
-            className={`oswald bg-hades-light${getStyle(p.type, verticalPadding)} ${
-                p.tags
-            }`}
-        >
+        <div className={` bg-hades-light${getStyle(p.type, verticalPadding)} ${p.tags}`}>
             {p.children}
         </div>
     )
