@@ -8,6 +8,14 @@ type User = {
     referals: string[]
     referal: string
     purchasesCount: number
+    cart: CartItem[]
+}
+
+type CartItem = {
+    id: string
+    name: string
+    price: number
+    quantity: number
 }
 
 type Item = {
