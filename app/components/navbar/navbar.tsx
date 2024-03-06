@@ -1,7 +1,5 @@
 'use client'
-import SearchIcon from '@/public/icons/search.png'
-import ProfileIcon from '@/public/icons/user.png'
-import CartIcon from '@/public/icons/cart.png'
+import CartIcon from '@/public/icons/cart.svg'
 import Image from 'next/image'
 import Logo from '@/public/brand/emoji-logo.jpg'
 import Link from 'next/link'
@@ -10,12 +8,11 @@ import React, { useEffect, useState } from 'react'
 import { mainPagesList } from './data'
 import NavbarBtn from './button'
 import { onAuthStateChanged } from 'firebase/auth'
-//import { auth } from '@/firebase/main'
 import User from './user'
 
 const Navbar = () => (
     <div className="z-50">
-        <div className="sup h-16 w-full" />
+        <div className="sup h-36 w-full" />
         <ContentWrapper
             verticalPadding={false}
             type="default"
@@ -38,41 +35,39 @@ const Component = () => {
 
 const Desktop = () => {
     return (
-        <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-7">
+        <div className="flex h-32 w-full flex-col items-center justify-center">
+            <div className="flex w-full flex-row items-center justify-evenly bg-red">
                 <Link href="/" className="w-14">
                     <Image
                         src={Logo}
-                        alt="Hvezda athlet logo"
+                        alt="Naked drugs logo"
                         width="0"
                         height="0"
                         sizes="100vw"
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
+                <input className="h-6 w-[35%] rounded-md bg-primary-hades" type="text" />
 
                 <User />
+                <Link href={'https://www.instagram.com/hvezda_pardubice/'}>
+                    <Image
+                        src={CartIcon.src}
+                        alt="Instagram icon"
+                        width={18}
+                        height={18}
+                    />
+                    <p>Košík</p>
+                </Link>
+            </div>
+            <div className="flex w-full flex-row justify-evenly bg-green">
                 {mainPagesList.map((page, index) => {
                     return <NavbarBtn key={index} title={page.name} link={page.url} />
                 })}
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex w-full items-center justify-between gap-4">
                 <div className="sup" />
                 {/* <Image src={XLogo} alt="X icon" width={18} height={18} /> */}
-                <Link href={'https://www.facebook.com/atletikapardubice/'}>
-                    <Image src={SearchIcon} alt="Ikona Facebook" width={18} height={18} />
-                </Link>
-                <Link href={'https://www.facebook.com/atletikapardubice/'}>
-                    <Image
-                        src={ProfileIcon}
-                        alt="Ikona Facebook"
-                        width={18}
-                        height={18}
-                    />
-                </Link>
-                <Link href={'https://www.instagram.com/hvezda_pardubice/'}>
-                    <Image src={CartIcon} alt="Instagram icon" width={18} height={18} />
-                </Link>
             </div>
         </div>
     )
