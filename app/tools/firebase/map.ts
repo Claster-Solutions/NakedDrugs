@@ -15,7 +15,7 @@ const user = (doc: DocumentData): User => {
         email: data.email,
         name: data.name,
         photoURL: data.photoURL,
-        cart: data.card,
+        cart: data.cart,
         liked: data.liked,
         referals: data.referals,
         referal: data.referal,
@@ -46,7 +46,7 @@ const product = (doc: DocumentData): Product => {
     const newProduct: Product = {
         id: doc.id,
         name: data.name,
-        price: data.price,
+        prices: data.price,
         description: data.description,
         images: data.images,
     }

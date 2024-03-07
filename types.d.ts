@@ -13,14 +13,14 @@ interface User {
 interface CartItem {
     id: string
     name: string
-    price: number
-    quantity: number
+    amount: number
+    price: ProductPrice
 }
 
 interface Product {
     id: string
     name: string
-    price: ProductPrice[]
+    prices: ProductPrice[]
     description: string
     images: ProductImage[]
 }

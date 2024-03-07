@@ -156,19 +156,33 @@ const addNewProduct = async (): Promise<void> => {
     const newProduct: Product = {
         id: "KratomBlue",
         name: "Kratom Blue",
-        price: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
+        prices: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
         description: "Kratom Blue is the best kratom in the world",
         images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
     }
     await setDoc(doc(productCollection, newProduct.id), newProduct)
 }
 
-const setUserLikes = async (uid: string, liked: string[]): Promise<void> => {
-    await updateDoc(doc(usersCollection, uid), { liked })
+const toggleUserLike = async (uid: string, productId: string): Promise<void> => {
+    const user = await getUser(uid)
+    if (user === null) return
+
+    const newLiked = user.liked.includes(productId)
+        ? user.liked.filter((id) => id !== productId)
+        : [...user.liked, productId]
+
+    await updateDoc(doc(usersCollection, uid), { liked: newLiked })
+
 }
 
-const setUserCart = async (uid: string, cart: CartItem[]): Promise<void> => {
-    await updateDoc(doc(usersCollection, uid), { cart })
+const addCartItem = async (uid: string, cartItem: CartItem): Promise<void> => {
+    const user = await getUser(uid)
+    if (user === null) return
+
+    console.log(user)
+
+    const newCart = [...user.cart, cartItem]
+    await updateDoc(doc(usersCollection, uid), { cart: newCart })
 }
 
 const fb = {
@@ -184,7 +198,7 @@ const fb = {
     setImage,
     getAllProducts,
     addNewProduct,
-    setUserLikes,
-    setUserCart
+    toggleUserLike,
+    addCartItem
 }
 export default fb

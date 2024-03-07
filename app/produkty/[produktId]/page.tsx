@@ -7,9 +7,10 @@ import Link from 'next/link'
 import { Metadata } from 'next/dist/lib/metadata/types/metadata-interface'
 import { Karantina } from 'next/font/google'
 import Amount from './components/amount'
-import Dropdown from './components/volumeDropdownn'
+import Dropdown from './components/dropdownn'
 import Like from './components/like'
 import Cart from './components/cart'
+import Product from './components/product'
 
 export async function generateStaticParams() {
     const products = await fb.getAllProducts()
@@ -21,21 +22,23 @@ export async function generateStaticParams() {
     return produkty.flat()
 }
 
-const Page = async ({ params }: { params: { produktId: string } }) => (
-    <>
-        <Navbar />
-        <ContentWrapper type="default">
-            <Component produktId={params.produktId} />
-        </ContentWrapper>
-        <Footer />
-    </>
-)
+const Page = async ({ params }: { params: { produktId: string } }) => {
+    const product = await fb.getProduct(params.produktId)
+
+    return (
+        <>
+            <Navbar />
+            <ContentWrapper type="default">
+                <Product product={product} />
+            </ContentWrapper>
+            <Footer />
+        </>
+    )
+}
 export default Page
 
 const validateOrder = (): boolean => {
-    if (true) {
-        return true
-    }
+    return true
 }
 
 const handleSubmit = () => {
@@ -46,36 +49,4 @@ const handleSubmit = () => {
     } else {
         alert('Objednávka nebyla odeslána')
     }
-}
-
-interface Props {
-    produktId: string
-}
-
-const Component = async (p: Props) => {
-    const product = await fb.getProduct(p.produktId)
-
-    if (!product) return notFound()
-
-    return (
-        <div className="flex flex-row">
-            <div className="">
-                {' '}
-                <img src={product.images[0].url} alt={product.images[0].alt} />
-            </div>
-            <div className="absolute right-40 flex flex-col justify-center gap-5">
-                <h1 className=" text-5xl font-semibold ">{product.name}</h1>
-                <Like productId={p.produktId} />
-                <Cart productId={p.produktId} />
-                <Dropdown price={product.price} />
-                <p className=" text-sm font-light">{product.description} </p>
-
-                <div className="flex flex-row">
-                    <Amount />
-
-                    {/* <button onClick={handleSubmit}>submit</button> */}
-                </div>
-            </div>
-        </div>
-    )
 }

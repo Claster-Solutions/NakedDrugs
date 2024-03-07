@@ -6,46 +6,32 @@ import React, { useEffect, useState } from 'react'
 
 interface Props {
     productId: string
+    user: User | null
 }
 
 export default function Like(p: Props) {
     const [liked, setLiked] = useState<boolean | null>(null)
-    const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userData = await fb.getUser(user.uid)
-                if (!userData) return
-
-                setUser(userData)
-                if (userData.liked.includes(p.productId)) {
-                    setLiked(true)
-                } else {
-                    setLiked(false)
-                }
-            }
-        })
-    }, [])
-
-    const handleLikeSubmit = async () => {
-        if (user === null) return
-        if (liked === null) return
-
-        if (liked) {
-            const newLiked = user.liked.filter((id) => id !== p.productId)
-            await fb.setUserLikes(user.id, newLiked)
-            setLiked(false)
-        } else {
-            const newLiked = [...user.liked, p.productId]
-            await fb.setUserLikes(user.id, newLiked)
+        if (p.user === null) return
+        if (p.user.liked.includes(p.productId)) {
             setLiked(true)
+        } else {
+            setLiked(false)
         }
+    }, [p.user])
+
+    const handleLikeClick = async () => {
+        if (p.user === null) return
+        if (liked === null) return
+        setLiked(!liked)
+
+        await fb.toggleUserLike(p.user.id, p.productId)
     }
 
     return (
         <div>
-            <button onClick={handleLikeSubmit}>{liked ? 'Dislike' : 'Like'}</button>
+            <button onClick={handleLikeClick}>{liked ? 'Dislike' : 'Like'}</button>
         </div>
     )
 }
