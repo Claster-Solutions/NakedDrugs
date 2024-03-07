@@ -1,9 +1,8 @@
-type User = {
+interface User {
     id: string
     email: string
     name: string
     photoURL: string
-    card: Item[]
     liked: string[]
     referals: string[]
     referal: string
@@ -11,19 +10,27 @@ type User = {
     cart: CartItem[]
 }
 
-type CartItem = {
+interface CartItem {
     id: string
     name: string
     price: number
     quantity: number
 }
 
-type Item = {
+interface Product {
     id: string
     name: string
+    price: ProductPrice[]
     description: string
-    price: number
-    image: string
+    images: ProductImage[]
+}
+interface ProductImage {
+    alt: string
+    url: string
+}
+interface ProductPrice {
+    volume: string
+    price: string
 }
 
 /*content Formater */

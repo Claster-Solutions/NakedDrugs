@@ -1,11 +1,10 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
-import { Price, Products } from '../data'
 import dropdown from '@/public/icons/Arrow_drop_down.svg'
 import { set } from 'firebase/database'
 
 interface DropdownProps {
-    price: Price[]
+    price: ProductPrice[]
 }
 
 const Dropdown = (p: DropdownProps) => {

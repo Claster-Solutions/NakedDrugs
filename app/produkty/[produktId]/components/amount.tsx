@@ -1,5 +1,6 @@
 'use client'
 
+import fb from '@/app/tools/firebase/queries'
 import React, { useState } from 'react'
 
 const Amount = () => {

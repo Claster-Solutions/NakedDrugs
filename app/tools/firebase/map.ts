@@ -15,12 +15,11 @@ const user = (doc: DocumentData): User => {
         email: data.email,
         name: data.name,
         photoURL: data.photoURL,
-        card: data.card,
+        cart: data.card,
         liked: data.liked,
         referals: data.referals,
         referal: data.referal,
         purchasesCount: data.purchasesCount,
-        cart: data.cart,
     }
 }
 const blogEvent = (
@@ -41,15 +40,18 @@ const blogEvent = (
     }
 }
 
-const product = (doc: DocumentData) => {
+const product = (doc: DocumentData): Product => {
     const data = doc.data()
-    return {
+
+    const newProduct: Product = {
         id: doc.id,
         name: data.name,
-        description: data.description,
-        img: data.image,
         price: data.price,
+        description: data.description,
+        images: data.images,
     }
+
+    return newProduct
 }
 
 const map = {

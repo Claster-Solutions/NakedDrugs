@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Logo from '@/public/brand/emoji-logo.jpg'
 import Link from 'next/link'
 import ContentWrapper from '../contentWrapper'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { mainPagesList } from './data'
 import NavbarBtn from './button'
-import { onAuthStateChanged } from 'firebase/auth'
 import User from './user'
+import fb from '@/app/tools/firebase/queries'
 
 const Navbar = () => (
     <div className="z-50">
@@ -50,7 +50,7 @@ const Desktop = () => {
                 <input className="h-6 w-[35%] rounded-md bg-primary-hades" type="text" />
 
                 <User />
-                <Link href={'https://www.instagram.com/hvezda_pardubice/'}>
+                <Link href={'/cart'}>
                     <Image
                         src={CartIcon.src}
                         alt="Instagram icon"

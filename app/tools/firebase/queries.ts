@@ -12,7 +12,7 @@ import {
     limit,
     deleteDoc,
 } from 'firebase/firestore'
-import { Product } from '@/app/produkty/data'
+
 
 // const getUserInfo = async (uid: string): Promise<User> => {
 //     const snap = await getDoc(doc(usersCollection, uid))
@@ -44,8 +44,7 @@ const createUser = async (
         photoURL: photoURL || '',
         referal: referal || '',
         purchasesCount: 0,
-
-        card: [],
+        cart: [],
         liked: [],
         referals: [],
     }
@@ -57,7 +56,7 @@ const addToUserCart = async (uid: string, product: Product): Promise<void> => {
     if (user === null) {
         throw new Error('User not found')
     }
-    const newCart = [...user.card, product]
+    const newCart = [...user.cart, product]
     await updateDoc(doc(usersCollection, uid), { card: newCart })
 }
 const getImage = (id: string): string => {
@@ -133,7 +132,6 @@ const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
 }
 
 //* Product
-
 const getProduct = async (id: string): Promise<Product> => {
     const snap = await getDoc(doc(productCollection, id))
     const mapped = map.product(snap)
@@ -152,9 +150,26 @@ const getAllProducts = async (): Promise<Product[]> => {
         .filter((product) => product !== undefined) as Product[]
     return products
 }
-// const createUser = async (user: AppUser): Promise<void> => {
-//     await setDoc(doc(usersCollection, user.uid), { ...user })
-// }
+
+//! TEMP
+const addNewProduct = async (): Promise<void> => {
+    const newProduct: Product = {
+        id: "KratomBlue",
+        name: "Kratom Blue",
+        price: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
+        description: "Kratom Blue is the best kratom in the world",
+        images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
+    }
+    await setDoc(doc(productCollection, newProduct.id), newProduct)
+}
+
+const setUserLikes = async (uid: string, liked: string[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { liked })
+}
+
+const setUserCart = async (uid: string, cart: CartItem[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { cart })
+}
 
 const fb = {
     getImage,
@@ -168,5 +183,8 @@ const fb = {
     getProduct,
     setImage,
     getAllProducts,
+    addNewProduct,
+    setUserLikes,
+    setUserCart
 }
 export default fb
