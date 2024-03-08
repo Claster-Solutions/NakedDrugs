@@ -1,7 +1,7 @@
 'use client'
 import clasterConfig from '@/claster-confing'
-import { auth } from '@/firebase/main'
-import be from '@/firebase/queries'
+import { auth } from '@/app/tools/firebase/main'
+import fb from '@/app/tools/firebase/queries'
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 
@@ -13,7 +13,7 @@ export default function User() {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const id = user.uid
-                const userData = await be.getUser(id)
+                const userData = await fb.getUser(id)
                 if (!userData) {
                     return
                 }
@@ -68,7 +68,7 @@ export default function User() {
                 })}
             </div>
 
-            <p>Casrd length: {user?.card.length}</p>
+            <p>Casrd length: {user?.cart.length}</p>
 
             <h2>Referal link:</h2>
             <p>{`${clasterConfig.websiteRootUrl}/invite?user=${user?.id}`}</p>

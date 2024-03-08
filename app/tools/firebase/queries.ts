@@ -13,7 +13,6 @@ import {
     deleteDoc,
 } from 'firebase/firestore'
 
-
 // const getUserInfo = async (uid: string): Promise<User> => {
 //     const snap = await getDoc(doc(usersCollection, uid))
 //     if (!snap.exists()) {
@@ -28,6 +27,10 @@ const getUser = async (uid: string): Promise<User | null> => {
         return null
     }
     return map.user(snap)
+}
+
+const setUser = async (user: User): Promise<void> => {
+    await setDoc(doc(usersCollection, user.id), user)
 }
 
 const createUser = async (
@@ -47,7 +50,6 @@ const createUser = async (
         cart: [],
         liked: [],
         referals: [],
-        cart: [],
     }
 
     await setDoc(doc(usersCollection, newUser.id), newUser)
@@ -155,11 +157,15 @@ const getAllProducts = async (): Promise<Product[]> => {
 //! TEMP
 const addNewProduct = async (): Promise<void> => {
     const newProduct: Product = {
-        id: "KratomBlue",
-        name: "Kratom Blue",
-        prices: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
-        description: "Kratom Blue is the best kratom in the world",
-        images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
+        id: 'KratomBlue',
+        name: 'Kratom Blue',
+        prices: [
+            { volume: '100g', price: '100' },
+            { volume: '200g', price: '190' },
+            { volume: '500g', price: '450' },
+        ],
+        description: 'Kratom Blue is the best kratom in the world',
+        images: [{ alt: 'Kratom Blue', url: '/kratom_placeholder.webp' }],
     }
     await setDoc(doc(productCollection, newProduct.id), newProduct)
 }
@@ -173,7 +179,6 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
         : [...user.liked, productId]
 
     await updateDoc(doc(usersCollection, uid), { liked: newLiked })
-
 }
 
 const addCartItem = async (uid: string, cartItem: CartItem): Promise<void> => {
@@ -193,6 +198,7 @@ const fb = {
     getBlog,
     deleteBlog,
     setBlog,
+    setUser,
     getLastBlogLimited,
     getAllBlogs,
     getProduct,
@@ -200,6 +206,6 @@ const fb = {
     getAllProducts,
     addNewProduct,
     toggleUserLike,
-    addCartItem
+    addCartItem,
 }
 export default fb
