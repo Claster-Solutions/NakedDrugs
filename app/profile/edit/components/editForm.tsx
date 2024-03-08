@@ -44,8 +44,12 @@ import React, { useState } from 'react'
 // }
 // export default EditForm
 
-const EditPageForm = (user: User) => {
-    const [editedUser, setEditedUser] = useState(user) // Pre-fill with user data
+interface Props {
+    user: User | null
+}
+
+const EditPageForm = (p: Props) => {
+    const [editedUser, setEditedUser] = useState(p.user) // Pre-fill with user data
 
     const handleChange = (event: { target: { name: any; value: any } }) => {
         setEditedUser({
