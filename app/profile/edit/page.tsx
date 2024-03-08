@@ -39,6 +39,10 @@ const Component = () => {
         })
     }, [])
 
+    if (user === null) {
+        return <p>Loading...</p>
+    }
+
     return (
         <div>
             <h1>Edit Profile</h1>

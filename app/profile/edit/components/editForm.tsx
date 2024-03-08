@@ -45,7 +45,7 @@ import React, { useState } from 'react'
 // export default EditForm
 
 interface Props {
-    user: User | null
+    user: User
 }
 
 const EditPageForm = (p: Props) => {
