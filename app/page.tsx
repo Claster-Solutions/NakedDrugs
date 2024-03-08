@@ -8,23 +8,23 @@ import BlogBanner from './main/blogBanner/blogBanner'
 import fb from './tools/firebase/queries'
 
 const Page = () => (
-  <>
-    <Navbar />
-    <ContentWrapper type="none">
-      <Component />
-    </ContentWrapper>
-    <Footer />
-  </>
+    <>
+        <Navbar />
+        <ContentWrapper type="default">
+            <Component />
+        </ContentWrapper>
+        <Footer />
+    </>
 )
 export default Page
 
 const Component = async () => {
-  const blogEvent = await fb.getLastBlogLimited(1);
-  return (
-    <div className="">
-      <HeroBanner />
-      <WhyUsBanner />
-      <BlogBanner Blog={blogEvent} />
-    </div>
-  )
+    const blogEvent = await fb.getLastBlogLimited(1)
+    return (
+        <div className="">
+            <HeroBanner />
+            <WhyUsBanner />
+            <BlogBanner Blog={blogEvent} />
+        </div>
+    )
 }

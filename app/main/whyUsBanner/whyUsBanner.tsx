@@ -4,32 +4,39 @@ import ProductImage from '@/public/images/kratom_placeholder.webp'
 import { WhyUsData } from './data'
 
 export default function WhyUsBanner() {
+    const [hoveredDiv, setHoveredDiv] = useState<number | null>(null)
 
-
-  const [hoveredDiv, setHoveredDiv] = useState<number | null>(null);
-
-
-  return (
-    <div className=" flex flex-col justify-evenly">
-
-      <p className='mx-[7%] text-3xl font-bold'>🖤 Nejoblíbenější 🖤</p>
-      <div className='flex flex-col justify-evenly p-8  md:flex-row'>
-        {WhyUsData.map((item, index) => {
-          return (
-
-            <div key={index} onMouseEnter={() => setHoveredDiv(index)} onMouseLeave={() => setHoveredDiv(null)} className="mx-10 mt-2 flex min-w-60 flex-col items-center overflow-hidden bg-white shadow-xs">
-              <div className="">
-                <div style={{ boxShadow: hoveredDiv === index ? '0px 5px 10px 0px rgba(0, 0, 0, 0.5)' : '', }} className='bg-primary-hades_light m-4 rounded-lg min-w-80 min-h-80'>
-                </div>
-                <h3 className='font-bold uppercase py-2 mx-4 text-md'>{item.title}</h3>
-                <p className=' mx-4'>{item.text}</p>
-              </div>
+    return (
+        <div className=" flex flex-col justify-evenly gap-12">
+            <p className="text-5xl font-bold">Nejoblíbenější</p>
+            <div className="flex flex-col justify-between p-0  md:flex-row">
+                {WhyUsData.map((item, index) => {
+                    return (
+                        <div
+                            key={index}
+                            onMouseEnter={() => setHoveredDiv(index)}
+                            onMouseLeave={() => setHoveredDiv(null)}
+                            className="shadow-xs  mx-0 mt-0 flex min-w-60 flex-col items-center overflow-visible bg-white"
+                        >
+                            <div className="">
+                                <div
+                                    style={{
+                                        boxShadow:
+                                            hoveredDiv === index
+                                                ? '0px 5px 10px 0px rgba(0, 0, 0, 0.5)'
+                                                : '',
+                                    }}
+                                    className="m-0 min-h-80 min-w-80 rounded-lg bg-primary-hades_light"
+                                ></div>
+                                <h3 className="text-md mx-0 py-2 font-bold uppercase">
+                                    {item.title}
+                                </h3>
+                                <p className=" mx-0">{item.text}</p>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
-          )
-        })}
-
-      </div>
-
-    </div>
-  )
+        </div>
+    )
 }

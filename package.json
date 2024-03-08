@@ -14,7 +14,9 @@
         "firebase": "^10.7.1",
         "next": "14.0.4",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "react-search-box": "^2.3.0",
+        "react-search-input": "^0.11.3"
     },
     "devDependencies": {
         "@types/node": "^20",

@@ -47,6 +47,7 @@ const createUser = async (
         cart: [],
         liked: [],
         referals: [],
+        cart: [],
     }
 
     await setDoc(doc(usersCollection, newUser.id), newUser)

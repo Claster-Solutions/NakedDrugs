@@ -12,7 +12,7 @@ import fb from '@/app/tools/firebase/queries'
 
 const Navbar = () => (
     <div className="z-50">
-        <div className="sup h-36 w-full" />
+        <div className="sup h-32 w-full" />
         <ContentWrapper
             verticalPadding={false}
             type="default"
@@ -35,8 +35,8 @@ const Component = () => {
 
 const Desktop = () => {
     return (
-        <div className="flex h-32 w-full flex-col items-center justify-center">
-            <div className="flex w-full flex-row items-center justify-evenly bg-red">
+        <div className="flex h-32 w-full flex-col items-center justify-center gap-2">
+            <div className="flex w-full flex-row items-center justify-between">
                 <Link href="/" className="w-14">
                     <Image
                         src={Logo}
@@ -47,10 +47,13 @@ const Desktop = () => {
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
-                <input className="h-6 w-[35%] rounded-md bg-primary-hades" type="text" />
-
+                <input
+                    className="h-8 w-[35%] rounded-md bg-primary-hades_light"
+                    type="text"
+                />
                 <User />
-                <Link href={'/cart'}>
+
+                <Link className="flex gap-2" href={'/cart'}>
                     <Image
                         src={CartIcon.src}
                         alt="Instagram icon"
@@ -60,7 +63,7 @@ const Desktop = () => {
                     <p>Košík</p>
                 </Link>
             </div>
-            <div className="flex w-full flex-row justify-evenly bg-green">
+            <div className="flex w-full flex-row justify-between">
                 {mainPagesList.map((page, index) => {
                     return <NavbarBtn key={index} title={page.name} link={page.url} />
                 })}
