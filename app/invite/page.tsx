@@ -1,14 +1,10 @@
 'use client'
-import { auth } from '@/firebase/main'
-import be from '@/firebase/queries'
-import {
-    GoogleAuthProvider,
-    createUserWithEmailAndPassword,
-    signInWithPopup,
-} from 'firebase/auth'
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { notFound } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import scripts from '../tools/scripts/scripts'
+import fb from '../tools/firebase/queries'
+import { auth } from '../tools/firebase/main'
 
 export default function Page() {
     const [invitor, setInvitor] = useState<User | null>()
@@ -29,7 +25,7 @@ export default function Page() {
                 return
             }
 
-            const user = await be.getUser(userId)
+            const user = await fb.getUser(userId)
             if (!user) {
                 setInviteError('User not found')
                 return
@@ -64,12 +60,12 @@ export default function Page() {
                 }
 
                 //? check if user exists in the database and create if not
-                const user = await be.getUser(uid)
+                const user = await fb.getUser(uid)
                 if (user) {
                     setInviteError('User already exists')
                     return
                 } else {
-                    await be.createUser(uid, email, name, photoURL, invitor?.id)
+                    await fb.createUser(uid, email, name, photoURL, invitor?.id)
                 }
 
                 window.location.href = '/'
@@ -97,12 +93,12 @@ export default function Page() {
                 }
 
                 //? check if user exists in the database and create if not
-                const user = await be.getUser(uid)
+                const user = await fb.getUser(uid)
                 if (user) {
                     setInviteError('User already exists')
                     return
                 } else {
-                    await be.createUser(uid, email, name, photoURL, invitor?.id)
+                    await fb.createUser(uid, email, name, photoURL, invitor?.id)
                 }
 
                 window.location.href = '/'

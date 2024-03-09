@@ -1,15 +1,17 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore'
 
-// const user = (doc: DocumentData): User => {
-//     const data = doc.data()
-//     return {
-//         id: doc.id,
-//         name: data.name,
-//         email: data.email,
-//     }
-// }
 const user = (doc: DocumentData): User => {
     const data = doc.data()
+
+    const orders: Order[] = data.orders.map((order: any) => {
+        return {
+            id: order.id,
+            state: order.state,
+            date: order.date.toDate(),
+            items: order.items,
+        }
+    })
+
     return {
         id: doc.id,
         email: data.email,
@@ -20,6 +22,7 @@ const user = (doc: DocumentData): User => {
         referals: data.referals,
         referal: data.referal,
         purchasesCount: data.purchasesCount,
+        orders,
     }
 }
 const blogEvent = (

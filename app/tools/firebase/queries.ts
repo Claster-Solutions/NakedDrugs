@@ -47,19 +47,12 @@ const createUser = async (
         cart: [],
         liked: [],
         referals: [],
-        cart: [],
+        orders: [],
     }
 
     await setDoc(doc(usersCollection, newUser.id), newUser)
 }
-const addToUserCart = async (uid: string, product: Product): Promise<void> => {
-    const user = await getUser(uid)
-    if (user === null) {
-        throw new Error('User not found')
-    }
-    const newCart = [...user.cart, product]
-    await updateDoc(doc(usersCollection, uid), { card: newCart })
-}
+
 const getImage = (id: string): string => {
     return 'image avalible after push'
     //return `www.oururl.com/images?id=${id}`
@@ -176,20 +169,20 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
 
 }
 
-const addCartItem = async (uid: string, cartItem: CartItem): Promise<void> => {
-    const user = await getUser(uid)
-    if (user === null) return
+const updateUserCart = async (uid: string, cart: CartItem[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { cart })
+}
 
-    console.log(user)
-
-    const newCart = [...user.cart, cartItem]
-    await updateDoc(doc(usersCollection, uid), { cart: newCart })
+const updateUserOrders = async (uid: string, orders: Order[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { orders })
 }
 
 const fb = {
+    updateUserOrders,
     getImage,
     getUser,
     createUser,
+    updateUserCart,
     getBlog,
     deleteBlog,
     setBlog,
@@ -199,7 +192,6 @@ const fb = {
     setImage,
     getAllProducts,
     addNewProduct,
-    toggleUserLike,
-    addCartItem
+    toggleUserLike
 }
 export default fb

@@ -25,23 +25,24 @@ const config: Config = {
                 '5xl': '3rem', // 5x extra large
                 '6xl': '4rem', // 6x extra large
             },
-        },
-        colors: {
-            primary: {
-                hades_main: '#323232',
-                hades: '#939393',
-                hades_light: '#E9E9E9',
-                //will add when we decide on color theme
-            },
 
-            //* default colors
-            green: '#349934',
-            blue: '#0000ff',
-            red: '#ff0000',
-            yellow: '#ffff00',
-            white: '#ffffff',
-            black: '#000000',
-            gray: '#808080',
+            colors: {
+                primary: {
+                    hades_main: '#323232',
+                    hades: '#939393',
+                    hades_light: '#E9E9E9',
+                    //will add when we decide on color theme
+                },
+
+                //* default colors
+                green: '#349934',
+                blue: '#0000ff',
+                red: '#ff0000',
+                yellow: '#ffff00',
+                white: '#ffffff',
+                black: '#000000',
+                gray: '#808080',
+            },
         },
     },
     plugins: [],

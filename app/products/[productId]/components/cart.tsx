@@ -1,8 +1,7 @@
 'use client'
-import { auth } from '@/app/tools/firebase/main'
 import fb from '@/app/tools/firebase/queries'
-import { onAuthStateChanged } from 'firebase/auth'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { v4 } from 'uuid'
 
 interface Props {
     product: Product
@@ -15,12 +14,16 @@ export default function Cart(p: Props) {
     const handleAddToCart = async () => {
         if (p.user === null) return
         const cartItem: CartItem = {
-            name: p.product.name,
-            id: p.product.id,
+            id: v4(),
+            productName: p.product.name,
+            productId: p.product.id,
             price: p.price,
             amount: p.amount,
+            productImage: p.product.images[0].url,
         }
-        await fb.addCartItem(p.user.id, cartItem)
+
+        const newCart = p.user.cart.concat(cartItem)
+        await fb.updateUserCart(p.user.id, newCart)
     }
 
     return (

@@ -11,7 +11,7 @@ export default function ProductBanner() {
                             <h3>{item.title}</h3>
                             <p>{item.text}</p>
                         </div>
-                        <img src={ProductBannerImg.src} alt="obrázek produktu" />
+                        <img src={ProductBannerImg.src} alt="obrázek productu" />
                     </div>
                 )
             })}

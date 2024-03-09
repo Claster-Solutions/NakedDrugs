@@ -8,15 +8,36 @@ interface User {
     referal: string
     purchasesCount: number
     cart: CartItem[]
+    orders: Order[]
 }
 
 interface CartItem {
     id: string
-    name: string
+    productId: string
+    productName: string
     amount: number
     price: ProductPrice
+    productImage: string
+}
+interface Order {
+    items: CartItem[]
+    id: string
+    state: "pending" | "paid" | "shipped" | "delivered" | "canceled"
+    date: Date
+    invoice: Invoice
+    note: string
 }
 
+interface Invoice {
+    name: string
+    lastName: string
+    email: string
+    phone: string
+    street: string
+    city: string
+    zip: string
+    country: string
+}
 interface Product {
     id: string
     name: string
