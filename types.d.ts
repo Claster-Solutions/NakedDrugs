@@ -25,6 +25,7 @@ interface Order {
     state: "pending" | "paid" | "shipped" | "delivered" | "canceled"
     date: Date
     invoice: Invoice
+    deliveryAddress: string
     note: string
 }
 

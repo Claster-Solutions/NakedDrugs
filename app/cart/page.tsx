@@ -78,7 +78,7 @@ export default function Page() {
                 })}
             </div>
             <div>
-                <Link href={'/purchase'}>Create order</Link>
+                <Link href={'/purchase'}>Purchase</Link>
             </div>
         </div>
     )

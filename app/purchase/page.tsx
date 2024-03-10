@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '../tools/firebase/main'
 import fb from '../tools/firebase/queries'
 import { v4 } from 'uuid'
+import Script from 'next/script'
+import PacketaWidget from './packetaWidget'
 
 export default function Page() {
     const [user, setUser] = useState<User | null>(null)
@@ -14,10 +16,26 @@ export default function Page() {
                 const userData = await fb.getUser(user.uid)
                 if (!userData) return
                 setUser(userData)
+
+                if (user.displayName) {
+                    setName(user.displayName)
+                }
+
+                if (user.email) {
+                    setEmail(user.email)
+                }
+
+                if (user.phoneNumber) {
+                    setPhone(user.phoneNumber)
+                }
             }
         })
     }, [])
 
+    //#Delivery data
+    const [deliveryAddress, setDeliveryAddress] = useState('')
+
+    //#Invoice data
     //#User
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -37,7 +55,9 @@ export default function Page() {
         if (!user) return
         if (user.cart.length < 1) return
 
-        if (!name || !lastName || !email || !phone || !street || !city || !zip || !country) {
+        if (!name || !lastName || !email || !phone || !street || !city || !zip || !country || !deliveryAddress) {
+            //log all of them
+            console.log(name, lastName, email, phone, street, city, zip, country, deliveryAddress)
             alert('Please fill all fields')
             return
         }
@@ -48,6 +68,7 @@ export default function Page() {
             date: new Date(),
             items: user.cart,
             note,
+            deliveryAddress,
             invoice: {
                 name,
                 lastName,
@@ -86,7 +107,7 @@ export default function Page() {
             <br />
 
             <h1>Vyberte dopravu</h1>
-            <p>TODO: Zasilkovna</p>
+            <PacketaWidget setDeliveryAddress={setDeliveryAddress} />
 
             <br />
             <br />
@@ -99,6 +120,7 @@ export default function Page() {
 
             <h1>Fakturační údaje</h1>
             <div>
+                {/* //TODO: ADD NAMES AND IDS TO ENANLE AUTO FILL */}
                 <input type="text" placeholder="Jméno" value={name} onChange={(e) => setName(e.target.value)} />
                 <input
                     type="text"
