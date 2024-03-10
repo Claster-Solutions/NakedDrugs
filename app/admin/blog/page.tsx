@@ -25,7 +25,7 @@ const ObjectRoot = () => {
                 Add new
             </Link>
             {blogs.map((blog, index) => (
-                <div>{blog.categoryName}</div>
+                <div key={index}>{blog.categoryName}</div>
                 // <DropDownYear category={category} key={index} index={index} />
             ))}
             <div className="sup h-20" />

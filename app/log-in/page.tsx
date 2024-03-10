@@ -1,14 +1,10 @@
 'use client'
-import { auth } from '@/firebase/main'
-import be from '@/firebase/queries'
-import {
-    GoogleAuthProvider,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-} from 'firebase/auth'
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { notFound } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 import scripts from '../tools/scripts/scripts'
+import fb from '../tools/firebase/queries'
+import { auth } from '../tools/firebase/main'
 
 export default function Page() {
     const [email, setEmail] = useState('')
@@ -44,9 +40,9 @@ export default function Page() {
 
                 //? check if user exists in the database and create if not
 
-                const user = await be.getUser(uid)
+                const user = await fb.getUser(uid)
                 if (!user) {
-                    await be.createUser(uid, email, name, photoURL)
+                    await fb.createUser(uid, email, name, photoURL)
                 }
 
                 window.location.href = '/'
