@@ -14,16 +14,16 @@ import Product from './components/product'
 
 export async function generateStaticParams() {
     const products = await fb.getAllProducts()
-    const produkty = products.map((produkt) => {
+    const productsMapped = products.map((product) => {
         return {
-            produktId: produkt.id,
+            productId: product.id,
         }
     })
-    return produkty.flat()
+    return productsMapped.flat()
 }
 
-const Page = async ({ params }: { params: { produktId: string } }) => {
-    const product = await fb.getProduct(params.produktId)
+const Page = async ({ params }: { params: { productId: string } }) => {
+    const product = await fb.getProduct(params.productId)
 
     return (
         <>

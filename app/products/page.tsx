@@ -21,13 +21,13 @@ const Component = async () => {
     console.log(products)
     return (
         <div className="">
-            <h1 className="h1">Produkty</h1>
+            <h1 className="h1">products</h1>
             <div className=" flex flex-row gap-8">
                 {products.map((product, index) => {
                     return (
                         <Link
                             key={index}
-                            href={`/produkty/${product.id}`}
+                            href={`/products/${product.id}`}
                             className=" w-1/4 overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl"
                         >
                             <img

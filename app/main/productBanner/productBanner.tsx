@@ -6,12 +6,15 @@ export default function ProductBanner() {
         <div className=" relative flex flex-col justify-evenly md:flex-row">
             {ProductBannerData.map((item, index) => {
                 return (
-                    <div className="mx-10 mt-6 flex min-w-60 flex-col items-center overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl">
+                    <div
+                        key={index}
+                        className="mx-10 mt-6 flex min-w-60 flex-col items-center overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl"
+                    >
                         <div className="m-4">
                             <h3>{item.title}</h3>
                             <p>{item.text}</p>
                         </div>
-                        <img src={ProductBannerImg.src} alt="obrázek produktu" />
+                        <img src={ProductBannerImg.src} alt="obrázek productu" />
                     </div>
                 )
             })}

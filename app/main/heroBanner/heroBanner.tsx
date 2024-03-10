@@ -13,7 +13,7 @@ export default function HeroBanner() {
                 </div>
                 <Link
                     className="ml-0 flex h-10 w-3/12 items-center justify-center rounded bg-primary-hades_main text-white"
-                    href={'/produkty'}
+                    href={'/products'}
                 >
                     <p className="font-light">Koupit</p>
                 </Link>
