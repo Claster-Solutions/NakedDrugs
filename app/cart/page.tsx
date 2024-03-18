@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '../tools/firebase/main'
 import fb from '../tools/firebase/queries'
 import Link from 'next/link'
-import { v4 } from 'uuid'
 
 export default function Page() {
     const [user, setUser] = useState<User | null>(null)
@@ -77,8 +76,11 @@ export default function Page() {
                     )
                 })}
             </div>
-            <div>
+            <div className={user?.cart.length && user?.cart.length >= 1 ? '' : 'hidden'}>
                 <Link href={'/purchase'}>Purchase</Link>
+            </div>
+            <div className={user?.cart.length && user?.cart.length >= 1 ? 'hidden' : ''}>
+                <Link href={'/products'}>Nakupovat</Link>
             </div>
         </div>
     )
