@@ -86,6 +86,9 @@ export default function Page() {
         setUser({ ...user, cart: [] })
         await fb.updateUserOrders(user.id, newOrders)
         await fb.updateUserCart(user.id, [])
+
+        //redirect to tahank you page
+        window.location.href = `/thankyou`
     }
 
     return (
