@@ -34,10 +34,7 @@ export default function User() {
     }
     if (authenticated === false) {
         return (
-            <Link
-                className="flex flex-row items-center gap-2 font-light"
-                href={'/signIn'}
-            >
+            <Link className="flex flex-row items-center gap-2 font-light" href={'/signIn'}>
                 <img src={ProfileIcon.src} />
                 <p>Sign In</p>
             </Link>
@@ -45,13 +42,7 @@ export default function User() {
     }
     return (
         <Link href={'/profile'} className=" flex flex-row gap-2 p-2">
-            <img
-                src={userPhotoURL}
-                alt="User photo"
-                className="rounded-xl"
-                width={20}
-                height={20}
-            />
+            <img src={userPhotoURL} alt="User photo" className="rounded-xl" width={20} height={20} />
             <p className="text-xs font-light">{userName}</p>
         </Link>
     )
