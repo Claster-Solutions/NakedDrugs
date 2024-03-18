@@ -6,11 +6,12 @@ import {
     getDoc,
     getDocs,
     orderBy,
-    query,
+    query as firebaseQuery,
     setDoc,
     updateDoc,
     limit,
     deleteDoc,
+    where,
 } from 'firebase/firestore'
 
 
@@ -119,7 +120,7 @@ const setBlog = async (event: BlogEvent): Promise<void> => {
 
 const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
     const snap = await getDocs(
-        query(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
+        firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
     )
     const mapped = snap.docs.map((doc) => map.blogEvent(doc))
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
@@ -138,11 +139,18 @@ const getProduct = async (id: string): Promise<Product> => {
 const getAllProducts = async (): Promise<Product[]> => {
     const snap = await getDocs(productCollection)
 
-    //* Map docs to ActionEvents
-    const products: Product[] = snap.docs
+    return snap.docs
         .map((doc) => map.product(doc))
-        .filter((product) => product !== undefined) as Product[]
-    return products
+        .filter(Boolean)
+}
+
+const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
+    const query = firebaseQuery(productCollection, where("id", "in", ids));
+    const snap = await getDocs(query)
+
+    return snap.docs
+        .map((doc) => map.product(doc))
+        .filter(Boolean)
 }
 
 //! TEMP
@@ -192,6 +200,7 @@ const fb = {
     setImage,
     getAllProducts,
     addNewProduct,
-    toggleUserLike
+    toggleUserLike,
+    getProductsByIDs
 }
 export default fb

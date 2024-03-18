@@ -26,7 +26,7 @@ const user = (doc: DocumentData): User => {
     }
 }
 const blogEvent = (
-    doc: DocumentSnapshot<DocumentData, DocumentData>,
+    doc: DocumentData
 ): BlogEvent | undefined => {
     if (!doc.exists()) {
         return undefined
