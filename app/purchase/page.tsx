@@ -85,10 +85,10 @@ export default function Page() {
         setUser({ ...user, orders: newOrders })
         setUser({ ...user, cart: [] })
         await fb.updateUserOrders(user.id, newOrders)
-        await fb.updateUserCart(user.id, [])
+        await fb.updateUsercart(user.id, [])
 
         //redirect to tahank you page
-        window.location.href = `/thankyou`
+        window.location.href = `/thank-you`
     }
 
     return (

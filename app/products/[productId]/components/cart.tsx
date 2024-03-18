@@ -11,9 +11,9 @@ interface Props {
 }
 
 export default function Cart(p: Props) {
-    const handleAddToCart = async () => {
+    const handleAddTocart = async () => {
         if (p.user === null) return
-        const cartItem: CartItem = {
+        const cartItem: cartItem = {
             id: v4(),
             productName: p.product.name,
             productId: p.product.id,
@@ -22,13 +22,13 @@ export default function Cart(p: Props) {
             productImage: p.product.images[0].url,
         }
 
-        const newCart = p.user.cart.concat(cartItem)
-        await fb.updateUserCart(p.user.id, newCart)
+        const newcart = p.user.cart.concat(cartItem)
+        await fb.updateUsercart(p.user.id, newcart)
     }
 
     return (
         <div>
-            <button onClick={handleAddToCart}>Add to cart</button>
+            <button onClick={handleAddTocart}>Add to cart</button>
         </div>
     )
 }

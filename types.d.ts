@@ -7,11 +7,11 @@ interface User {
     referals: string[]
     referal: string
     purchasesCount: number
-    cart: CartItem[]
+    cart: cartItem[]
     orders: Order[]
 }
 
-interface CartItem {
+interface cartItem {
     id: string
     productId: string
     productName: string
@@ -20,7 +20,7 @@ interface CartItem {
     productImage: string
 }
 interface Order {
-    items: CartItem[]
+    items: cartItem[]
     id: string
     state: "pending" | "paid" | "shipped" | "delivered" | "canceled"
     date: Date
@@ -45,6 +45,15 @@ interface Product {
     prices: ProductPrice[]
     description: string
     images: ProductImage[]
+    reviews: Review[]
+}
+interface Review {
+    userId: string
+    name: string
+    photoURL: string
+    date: Date
+    text: string
+    rate: 1 | 2 | 3 | 4 | 5
 }
 interface ProductImage {
     alt: string

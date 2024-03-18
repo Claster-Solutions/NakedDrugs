@@ -21,26 +21,26 @@ export default function Page() {
     const handleChangeAmount = async (productId: string, amount: number) => {
         if (!user) return
         if (amount < 1) return
-        const newCart = user.cart.map((item) => {
+        const newcart = user.cart.map((item) => {
             if (item.productId === productId) {
                 item.amount = amount
             }
             return item
         })
-        setUser({ ...user, cart: newCart })
-        await fb.updateUserCart(user.id, newCart)
+        setUser({ ...user, cart: newcart })
+        await fb.updateUsercart(user.id, newcart)
     }
 
-    const handleCardItemDelete = async (productId: string) => {
+    const handlecartItemDelete = async (productId: string) => {
         if (!user) return
-        const newCart = user.cart.filter((item) => item.productId !== productId)
-        setUser({ ...user, cart: newCart })
-        await fb.updateUserCart(user.id, newCart)
+        const newcart = user.cart.filter((item) => item.productId !== productId)
+        setUser({ ...user, cart: newcart })
+        await fb.updateUsercart(user.id, newcart)
     }
 
     return (
         <div>
-            <h1>Cart</h1>
+            <h1>cart</h1>
             <p>User: {user?.name}</p>
             <div className="flex flex-col gap-10">
                 {user?.cart.map((item, index) => {
@@ -67,7 +67,7 @@ export default function Page() {
                                 </button>
                                 <button
                                     className="bg-slate-400 p-4"
-                                    onClick={() => handleCardItemDelete(item.productId)}
+                                    onClick={() => handlecartItemDelete(item.productId)}
                                 >
                                     Delete
                                 </button>

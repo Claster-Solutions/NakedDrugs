@@ -1,15 +1,7 @@
-import { notFound } from 'next/navigation'
 import ContentWrapper from '../../components/contentWrapper'
 import Footer from '../../components/footer/footer'
 import Navbar from '../../components/navbar/navbar'
 import fb from '@/app/tools/firebase/queries'
-import Link from 'next/link'
-import { Metadata } from 'next/dist/lib/metadata/types/metadata-interface'
-import { Karantina } from 'next/font/google'
-import Amount from './components/amount'
-import Dropdown from './components/dropdownn'
-import Like from './components/like'
-import Cart from './components/cart'
 import Product from './components/product'
 
 export async function generateStaticParams() {

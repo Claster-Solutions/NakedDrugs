@@ -1,5 +1,5 @@
 'use client'
-import CartIcon from '@/public/icons/cart.svg'
+import cartIcon from '@/public/icons/cart.svg'
 import Image from 'next/image'
 import Logo from '@/public/brand/emoji-logo.jpg'
 import Link from 'next/link'
@@ -51,7 +51,7 @@ const Desktop = () => {
                 <User />
 
                 <Link className="flex gap-2" href={'/cart'}>
-                    <img src={CartIcon.src} alt="Instagram icon" width={18} height={18} />
+                    <img src={cartIcon.src} alt="Instagram icon" width={18} height={18} />
                     <p>Košík</p>
                 </Link>
             </div>

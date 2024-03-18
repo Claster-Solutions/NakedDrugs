@@ -113,9 +113,7 @@ const deleteBlog = async (id: string): Promise<void> => {
 }
 
 const setBlog = async (event: BlogEvent): Promise<void> => {
-    console.log(event)
     await setDoc(doc(blogCollection, event.id), { ...event, updatedAt: new Date() })
-    console.log('done')
 }
 
 const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
@@ -144,6 +142,10 @@ const getAllProducts = async (): Promise<Product[]> => {
         .filter(Boolean)
 }
 
+const updateProduct = async (product: Product): Promise<void> => {
+    await setDoc(doc(productCollection, product.id), product)
+}
+
 const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
     const query = firebaseQuery(productCollection, where("id", "in", ids));
     const snap = await getDocs(query)
@@ -161,6 +163,7 @@ const addNewProduct = async (): Promise<void> => {
         prices: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
         description: "Kratom Blue is the best kratom in the world",
         images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
+        reviews: [],
     }
     await setDoc(doc(productCollection, newProduct.id), newProduct)
 }
@@ -177,7 +180,7 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
 
 }
 
-const updateUserCart = async (uid: string, cart: CartItem[]): Promise<void> => {
+const updateUsercart = async (uid: string, cart: cartItem[]): Promise<void> => {
     await updateDoc(doc(usersCollection, uid), { cart })
 }
 
@@ -190,7 +193,7 @@ const fb = {
     getImage,
     getUser,
     createUser,
-    updateUserCart,
+    updateUsercart,
     getBlog,
     deleteBlog,
     setBlog,
@@ -201,6 +204,7 @@ const fb = {
     getAllProducts,
     addNewProduct,
     toggleUserLike,
-    getProductsByIDs
+    getProductsByIDs,
+    updateProduct
 }
 export default fb

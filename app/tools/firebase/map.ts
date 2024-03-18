@@ -46,15 +46,27 @@ const blogEvent = (
 const product = (doc: DocumentData): Product => {
     const data = doc.data()
 
-    const newProduct: Product = {
+    const reviews: Review[] = data.reviews.map((review: any) => {
+        return {
+            userId: review.userId,
+            name: review.name,
+            photoURL: review.photoURL,
+            date: review.date.toDate(),
+            text: review.text,
+            rate: review.rate,
+        }
+    })
+
+    const product: Product = {
         id: doc.id,
         name: data.name,
-        prices: data.price,
+        prices: data.prices,
         description: data.description,
         images: data.images,
+        reviews
     }
 
-    return newProduct
+    return product
 }
 
 const map = {

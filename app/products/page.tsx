@@ -18,7 +18,6 @@ export default Page
 
 const Component = async () => {
     const products = await fb.getAllProducts()
-    console.log(products)
     return (
         <div className="">
             <h1 className="h1">products</h1>
@@ -30,11 +29,7 @@ const Component = async () => {
                             href={`/products/${product.id}`}
                             className=" w-1/4 overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl"
                         >
-                            <img
-                                src={product.images[0].url}
-                                alt={product.images[0].alt}
-                                className="object-cover"
-                            />
+                            <img src={product.images[0].url} alt={product.images[0].alt} className="object-cover" />
                         </Link>
                     )
                 })}
