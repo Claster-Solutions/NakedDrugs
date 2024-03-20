@@ -9,6 +9,7 @@ interface User {
     purchasesCount: number
     cart: cartItem[]
     orders: Order[]
+    invoiceData: Invoice?
 }
 
 interface cartItem {
@@ -38,6 +39,12 @@ interface Invoice {
     city: string
     zip: string
     country: string
+    company: Company?
+}
+interface Company {
+    companyName: string
+    IC: string
+    DIC: string
 }
 interface Product {
     id: string

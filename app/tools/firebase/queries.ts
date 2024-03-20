@@ -49,6 +49,7 @@ const createUser = async (
         liked: [],
         referals: [],
         orders: [],
+        invoiceData: null,
     }
 
     await setDoc(doc(usersCollection, newUser.id), newUser)
@@ -188,6 +189,10 @@ const updateUserOrders = async (uid: string, orders: Order[]): Promise<void> => 
     await updateDoc(doc(usersCollection, uid), { orders })
 }
 
+const updateUserInvoiceData = async (uid: string, invoiceData: Invoice): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { invoiceData })
+}
+
 const fb = {
     updateUserOrders,
     getImage,
@@ -205,6 +210,7 @@ const fb = {
     addNewProduct,
     toggleUserLike,
     getProductsByIDs,
-    updateProduct
+    updateProduct,
+    updateUserInvoiceData,
 }
 export default fb

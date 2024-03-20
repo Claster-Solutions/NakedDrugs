@@ -8,6 +8,12 @@ const config: Config = {
     ],
     theme: {
         extend: {
+
+            //all directions box shadow
+            boxShadow: {
+                'custom': '0px 5px 15px 0px rgba(0,0,0,0.1)',
+            },
+
             backgroundImage: {
                 'footer-texture': "url('/img/footer-texture.png')",
             },
@@ -27,12 +33,10 @@ const config: Config = {
             },
 
             colors: {
-                primary: {
-                    hades_main: '#323232',
-                    hades: '#939393',
-                    hades_light: '#E9E9E9',
-                    //will add when we decide on color theme
-                },
+                hades_main: '#323232',
+                hades: '#939393',
+                hades_light: '#E9E9E9',
+                //will add when we decide on color theme
 
                 //* default colors
                 green: '#349934',

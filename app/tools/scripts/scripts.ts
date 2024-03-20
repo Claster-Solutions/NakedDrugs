@@ -1,10 +1,18 @@
 import Compress from 'compress.js'
 
-const validateEmailPasswordFields = (email: string, password: string) => {
+const validateSignUpFields = (name: string, email: string, password: string, password2: string) => {
+    if (name === '' || email === '' || password === '' || password === password2) {
+        return false
+    }
+    return true
+}
+
+const validateLogInFields = (email: string, password: string) => {
     if (email === '' || password === '') {
         return false
     }
     return true
+
 }
 
 const generateRandomID = (): string => {
@@ -32,7 +40,8 @@ const resizeImage = async (file: File, maxWidth: number) => {
 }
 
 const scripts = {
-    validateEmailPasswordFields,
+    validateSignUpFields,
+    validateLogInFields,
     generateRandomID,
     resizeImage,
 }

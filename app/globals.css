@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.6s ease;
+}
+
+input {
+    outline: none;
+    border: none;
+    background-color: #e9e9e9;
+    padding: 1rem;
+    height: 3rem;
+    color: black;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 3px solid #e9e9e9;
+}
+
+input:focus {
+    border: 3px solid #ffb41f;
+}
+
+input::placeholder {
+    color: rgb(119, 119, 119);
+    opacity: 1; /* Firefox */
+}
+
 @keyframes glowing-hover {
     0% {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);

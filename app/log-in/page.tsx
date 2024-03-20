@@ -9,12 +9,13 @@ import { auth } from '../tools/firebase/main'
 export default function Page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
     const [error, setError] = useState<boolean | null>(null)
 
     const provider = new GoogleAuthProvider()
 
     const handleSubmit = async () => {
-        if (!scripts.validateEmailPasswordFields(email, password)) {
+        if (!scripts.validateLogInFields(email, password)) {
             setError(true)
             return
         }
@@ -58,26 +59,39 @@ export default function Page() {
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
-            <div className="flex flex-col bg-gray p-3">
-                <h1 className="text-3xl font-bold">Here you can log-in</h1>
-                <input
-                    type="text"
-                    placeholder="email"
-                    className="bg-white"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="password"
-                    className="bg-white"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                {error && <p className="text-red-500">Invalid credentials</p>}
-                <button onClick={handleSubmit}>Submit</button>
+            <div className="md:shadow-custom flex w-full flex-col rounded-md p-5 md:w-4/12 md:p-10 2xl:w-3/12">
+                <h1 className="text-3xl font-bold">Log in</h1>
 
-                <button onClick={handleGoogleSignIn}>Log-in with Google</button>
+                <div className="flex flex-col gap-5 py-8">
+                    <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <button className="bg-hades_main h-12 rounded-md text-white" onClick={handleSubmit}>
+                        Log in
+                    </button>
+                    <button
+                        onClick={handleGoogleSignIn}
+                        className="border-hades_main flex h-12 items-center justify-center gap-2 rounded-md border-2 border-solid"
+                    >
+                        <img src="/icons/google.svg" className="w-8" />
+                        <p>Sign up with Google</p>
+                    </button>
+                    {error && <p className="text-red">Invalid credentials...</p>}
+                </div>
+
+                <br />
+
+                <div className="flex justify-center gap-2">
+                    <p>Dont have an account?</p>
+                    <a className="font-semibold hover:underline" href="/sign-up">
+                        Sing up
+                    </a>
+                </div>
             </div>
         </div>
     )

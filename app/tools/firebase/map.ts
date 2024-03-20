@@ -23,6 +23,7 @@ const user = (doc: DocumentData): User => {
         referal: data.referal,
         purchasesCount: data.purchasesCount,
         orders,
+        invoiceData: data.invoiceData || null,
     }
 }
 const blogEvent = (
