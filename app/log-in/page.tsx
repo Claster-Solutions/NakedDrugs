@@ -59,7 +59,7 @@ export default function Page() {
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
-            <div className="md:shadow-custom flex w-full flex-col rounded-md p-5 md:w-4/12 md:p-10 2xl:w-3/12">
+            <div className="flex w-full flex-col rounded-md p-5 md:w-4/12 md:p-10 md:shadow-custom 2xl:w-3/12">
                 <h1 className="text-3xl font-bold">Log in</h1>
 
                 <div className="flex flex-col gap-5 py-8">
@@ -71,14 +71,14 @@ export default function Page() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <button className="bg-hades_main h-12 rounded-md text-white" onClick={handleSubmit}>
+                    <button className="h-10 rounded-md bg-hades_main text-white" onClick={handleSubmit}>
                         Log in
                     </button>
                     <button
                         onClick={handleGoogleSignIn}
-                        className="border-hades_main flex h-12 items-center justify-center gap-2 rounded-md border-2 border-solid"
+                        className="flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid border-hades_main"
                     >
-                        <img src="/icons/google.svg" className="w-8" />
+                        <img src="/icons/google.svg" className="w-6" />
                         <p>Sign up with Google</p>
                     </button>
                     {error && <p className="text-red">Invalid credentials...</p>}

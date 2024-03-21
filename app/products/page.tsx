@@ -11,16 +11,17 @@ const Page = () => (
         <ContentWrapper type="default">
             <Component />
         </ContentWrapper>
-        <Footer />
+        {/* <Footer /> */}
     </>
 )
 export default Page
 
 const Component = async () => {
     const products = await fb.getAllProducts()
+
     return (
-        <div className="">
-            <h1 className="h1">products</h1>
+        <div className="bg-red">
+            <h1 className="f5 font-semibold">Products</h1>
             <div className=" flex flex-row gap-8">
                 {products.map((product, index) => {
                     return (
