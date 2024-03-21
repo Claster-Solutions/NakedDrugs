@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Blogcart from './blogcart'
+import Blogcard from './blogCard'
 
 interface Props {
     blogs: AllBlogs
@@ -22,7 +22,7 @@ export default function YearDropdown(p: Props) {
 
             <div className={`${open ? ' max-h-full' : 'max-h-0'} transition-max-height overflow-hidden`}>
                 {p.blogs.blogs.map((blog, index) => (
-                    <Blogcart key={index} blog={blog} />
+                    <Blogcard key={index} blog={blog} />
                 ))}
             </div>
         </div>

@@ -6,7 +6,7 @@ import { format } from '@/app/tools/format/format'
 interface Props {
     blog: BlogEvent
 }
-export default function Blogcart(p: Props) {
+export default function Blogcard(p: Props) {
     const date = new Date(Number(p.blog.date))
     return (
         <div className="m-4 flex max-h-56 min-h-40 flex-row justify-between rounded-xl bg-white shadow-lg hover:shadow-xl">
