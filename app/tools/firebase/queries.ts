@@ -14,15 +14,6 @@ import {
     where,
 } from 'firebase/firestore'
 
-
-// const getUserInfo = async (uid: string): Promise<User> => {
-//     const snap = await getDoc(doc(usersCollection, uid))
-//     if (!snap.exists()) {
-//         throw new Error('User not found')
-//     }
-//     return map.user(snap)
-// }
-
 const getUser = async (uid: string): Promise<User | null> => {
     const snap = await getDoc(doc(usersCollection, uid))
     if (!snap.exists()) {
@@ -143,6 +134,11 @@ const getAllProducts = async (): Promise<Product[]> => {
         .filter(Boolean)
 }
 
+const getProductsByCategory = async (category: Category): Promise<Product[]> => {
+    const allProducts = await getAllProducts()
+    return allProducts.filter((product) => product.categories.includes(category))
+}
+
 const updateProduct = async (product: Product): Promise<void> => {
     await setDoc(doc(productCollection, product.id), product)
 }
@@ -165,6 +161,7 @@ const addNewProduct = async (): Promise<void> => {
         description: "Kratom Blue is the best kratom in the world",
         images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
         reviews: [],
+        categories: [],
     }
     await setDoc(doc(productCollection, newProduct.id), newProduct)
 }
@@ -212,5 +209,6 @@ const fb = {
     getProductsByIDs,
     updateProduct,
     updateUserInvoiceData,
+    getProductsByCategory,
 }
 export default fb

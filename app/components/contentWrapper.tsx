@@ -15,9 +15,9 @@ const getStyle = (type: string) => {
         case 'none':
             return ''
         case 'default':
-            return 'px-6 md:px-36'
+            return 'px-6 md:px-28'
         case 'article':
-            return 'px-12 md:px-56'
+            return 'px-12 md:px-40'
         default:
             return ''
     }

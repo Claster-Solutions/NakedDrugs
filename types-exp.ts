@@ -1,0 +1,1 @@
+export const categoryOptions: Category[] = ["all", "cars", "spaceships", "animals", "plants"];

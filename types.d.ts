@@ -12,6 +12,8 @@ interface User {
     invoiceData: Invoice?
 }
 
+type Category = "all" | "cars" | "spaceships" | "animals" | "plants";
+
 interface cartItem {
     id: string
     productId: string
@@ -53,6 +55,7 @@ interface Product {
     description: string
     images: ProductImage[]
     reviews: Review[]
+    categories: Category[]
 }
 interface Review {
     userId: string

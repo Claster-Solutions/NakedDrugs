@@ -64,7 +64,8 @@ const product = (doc: DocumentData): Product => {
         prices: data.prices,
         description: data.description,
         images: data.images,
-        reviews
+        reviews,
+        categories: data.categories,
     }
 
     return product
