@@ -13,11 +13,7 @@ import fb from '@/app/tools/firebase/queries'
 const Navbar = () => (
     <div className="z-50">
         <div className="sup h-32 w-full" />
-        <ContentWrapper
-            verticalPadding={false}
-            type="default"
-            tags="bg-white text-black shadow-xl fixed w-full top-0 left-0 z-50"
-        >
+        <ContentWrapper type="default" tags="bg-white text-black shadow-xl fixed w-full top-0 left-0 z-50">
             <Component />
         </ContentWrapper>
     </div>
@@ -47,7 +43,7 @@ const Desktop = () => {
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
-                <input className="h-8 w-[35%] rounded-md bg-primary-hades_light" type="text" />
+                <input className="bg-primary-hades_light h-8 w-[35%] rounded-md" type="text" />
                 <User />
 
                 <Link className="flex gap-2" href={'/cart'}>
