@@ -20,7 +20,7 @@ const Page = async ({ params }: { params: { productId: string } }) => {
     return (
         <>
             <Navbar />
-            <ContentWrapper type="default">
+            <ContentWrapper page type="default">
                 <Product product={product} />
             </ContentWrapper>
             <Footer />
@@ -28,7 +28,3 @@ const Page = async ({ params }: { params: { productId: string } }) => {
     )
 }
 export default Page
-
-const validateOrder = (): boolean => {
-    return true
-}

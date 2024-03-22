@@ -9,13 +9,16 @@ import fb from '@/app/tools/firebase/queries'
 
 export default async function Nabar() {
     return (
-        <ContentWrapper
-            id="navbar"
-            type="default"
-            tags="w-screen fixed right-0 top-0 shadow-md transition-all duration-750 ease-in-out bg-white"
-        >
-            <NavbarPC />
-        </ContentWrapper>
+        <>
+            <ContentWrapper
+                id="navbar"
+                type="default"
+                tags="w-screen fixed right-0 top-0 shadow-md transition-all duration-750 ease-in-out"
+            >
+                <NavbarPC />
+            </ContentWrapper>
+            <div className="h-16 w-full" />
+        </>
     )
 }
 
@@ -23,7 +26,7 @@ const NavbarPC = async () => {
     const products = await fb.getAllProducts()
 
     return (
-        <div className="flex h-16 w-full items-center justify-between">
+        <div className="flex h-16 w-full items-center justify-between bg-white">
             <div className="flex h-full w-6/12 items-center gap-10">
                 <Link href={'/'} className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-full bg-black" />
