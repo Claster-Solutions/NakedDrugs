@@ -117,7 +117,7 @@ export default function Page() {
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
-            <div className="flex w-full flex-col rounded-md p-5 md:w-4/12 md:p-10 md:shadow-custom 2xl:w-3/12">
+            <div className="flex w-full flex-col rounded p-5 md:w-4/12 md:p-10 md:shadow-custom 2xl:w-3/12">
                 <h1 className="text-3xl font-bold">Sign up by invite</h1>
 
                 <div className="flex flex-col gap-5 py-8">
@@ -138,7 +138,7 @@ export default function Page() {
 
                     <button
                         disabled={invitorError ? true : false}
-                        className="bg-hades-main h-10 rounded-md text-white disabled:opacity-30"
+                        className="bg-hades-main h-10 rounded text-white disabled:opacity-30"
                         onClick={handleSubmit}
                     >
                         Sign up
@@ -146,7 +146,7 @@ export default function Page() {
                     <button
                         disabled={invitorError ? true : false}
                         onClick={handleGoogleSignIn}
-                        className="border-hades-main flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid disabled:opacity-30"
+                        className="border-hades-main flex h-10 items-center justify-center gap-2 rounded border-2 border-solid disabled:opacity-30"
                     >
                         <img src="/icons/google.svg" className="w-6" />
                         <p>Sign up with Google</p>

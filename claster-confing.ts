@@ -8,7 +8,7 @@ interface ClasterConfig {
 }
 
 const clasterConfig: ClasterConfig = {
-    websiteRootUrl: 'https://naked-drugs.cz',
+    websiteRootUrl: 'https://naked-drugs.web.app',
     gitRepoSignature: '',
     emailRecipients: [],
 }

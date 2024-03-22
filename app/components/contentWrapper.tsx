@@ -5,10 +5,15 @@ interface Props {
     type: 'none' | 'default' | 'article'
     tags?: string
     page?: boolean
+    id?: string
 }
 
 export default function ContentWrapper(p: Props) {
-    return <div className={`${getStyle(p.type)} ${p.tags} ${p.page ? 'min-h-[80vh]' : ''}`}>{p.children}</div>
+    return (
+        <div id={p.id} className={`${getStyle(p.type)} ${p.tags} ${p.page ? 'min-h-[80vh]' : ''}`}>
+            {p.children}
+        </div>
+    )
 }
 
 const getStyle = (type: string) => {

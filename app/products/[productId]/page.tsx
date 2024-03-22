@@ -32,13 +32,3 @@ export default Page
 const validateOrder = (): boolean => {
     return true
 }
-
-const handleSubmit = () => {
-    const isValid = validateOrder()
-
-    if (isValid) {
-        alert('Objednávka byla úspěšně odeslána')
-    } else {
-        alert('Objednávka nebyla odeslána')
-    }
-}

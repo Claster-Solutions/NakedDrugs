@@ -4,8 +4,23 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '../tools/firebase/main'
 import fb from '../tools/firebase/queries'
 import Link from 'next/link'
+import Footer from '../components/footer/footer'
+import ContentWrapper from '../components/contentWrapper'
+import Navbar from '../components/navbar/navbar'
 
 export default function Page() {
+    return (
+        <>
+            <Navbar />
+            <ContentWrapper page type="default">
+                <Component />
+            </ContentWrapper>
+            <Footer />
+        </>
+    )
+}
+
+function Component() {
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
