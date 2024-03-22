@@ -20,7 +20,7 @@ const Component = () => {
         <div>
             <h1>User Profile</h1>
             <User />
-            <Link href={'/edit'}>Edit Profile</Link>
+            <Link href={'/profile/edit'}>Edit Profile</Link>
         </div>
     )
 }

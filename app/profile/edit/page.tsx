@@ -47,7 +47,6 @@ const Component = () => {
         <div>
             <h1>Edit Profile</h1>
             <EditPageForm user={user} />
-            <div>a</div>
         </div>
     )
 }

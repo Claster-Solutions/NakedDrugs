@@ -13,6 +13,7 @@ import {
     deleteDoc,
     where,
 } from 'firebase/firestore'
+import { updateEmail } from 'firebase/auth/cordova'
 
 // const getUserInfo = async (uid: string): Promise<User> => {
 //     const snap = await getDoc(doc(usersCollection, uid))
@@ -31,7 +32,20 @@ const getUser = async (uid: string): Promise<User | null> => {
 }
 
 const setUser = async (user: User): Promise<void> => {
-    await setDoc(doc(usersCollection, user.id), user)
+    //   await setDoc(doc(usersCollection, user.id), user)
+    await updateDoc(
+        doc(usersCollection, user.id),
+        user.name,
+        user.email,
+        user.photoURL,
+        user.referal,
+        user.purchasesCount,
+        user.cart,
+        user.liked,
+        user.referals,
+        user.orders,
+        user.invoiceData,
+    )
 }
 
 const createUser = async (
