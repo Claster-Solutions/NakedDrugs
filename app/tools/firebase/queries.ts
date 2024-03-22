@@ -13,6 +13,15 @@ import {
     deleteDoc,
     where,
 } from 'firebase/firestore'
+import { updateEmail } from 'firebase/auth/cordova'
+
+// const getUserInfo = async (uid: string): Promise<User> => {
+//     const snap = await getDoc(doc(usersCollection, uid))
+//     if (!snap.exists()) {
+//         throw new Error('User not found')
+//     }
+//     return map.user(snap)
+// }
 
 const getUser = async (uid: string): Promise<User | null> => {
     const snap = await getDoc(doc(usersCollection, uid))
@@ -20,6 +29,23 @@ const getUser = async (uid: string): Promise<User | null> => {
         return null
     }
     return map.user(snap)
+}
+
+const setUser = async (user: User): Promise<void> => {
+    //   await setDoc(doc(usersCollection, user.id), user)
+    await updateDoc(
+        doc(usersCollection, user.id),
+        user.name,
+        user.email,
+        user.photoURL,
+        user.referal,
+        user.purchasesCount,
+        user.cart,
+        user.liked,
+        user.referals,
+        user.orders,
+        user.invoiceData,
+    )
 }
 
 const createUser = async (
@@ -61,9 +87,7 @@ const getAllBlogs = async (): Promise<AllBlogs[]> => {
     //* Group objects by categoryName
     const result: AllBlogs[] = []
     blogEvents.forEach((blog) => {
-        const index = result.findIndex(
-            (category) => category.categoryName === blog.categoryName,
-        )
+        const index = result.findIndex((category) => category.categoryName === blog.categoryName)
         if (index === -1) {
             result.push({
                 categoryName: blog.categoryName,
@@ -109,9 +133,7 @@ const setBlog = async (event: BlogEvent): Promise<void> => {
 }
 
 const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
-    const snap = await getDocs(
-        firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
-    )
+    const snap = await getDocs(firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)))
     const mapped = snap.docs.map((doc) => map.blogEvent(doc))
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
 }
@@ -129,9 +151,7 @@ const getProduct = async (id: string): Promise<Product> => {
 const getAllProducts = async (): Promise<Product[]> => {
     const snap = await getDocs(productCollection)
 
-    return snap.docs
-        .map((doc) => map.product(doc))
-        .filter(Boolean)
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
 }
 
 const getProductsByCategory = async (category: Category): Promise<Product[]> => {
@@ -144,22 +164,24 @@ const updateProduct = async (product: Product): Promise<void> => {
 }
 
 const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
-    const query = firebaseQuery(productCollection, where("id", "in", ids));
+    const query = firebaseQuery(productCollection, where('id', 'in', ids))
     const snap = await getDocs(query)
 
-    return snap.docs
-        .map((doc) => map.product(doc))
-        .filter(Boolean)
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
 }
 
 //! TEMP
 const addNewProduct = async (): Promise<void> => {
     const newProduct: Product = {
-        id: "KratomBlue",
-        name: "Kratom Blue",
-        prices: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
-        description: "Kratom Blue is the best kratom in the world",
-        images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
+        id: 'KratomBlue',
+        name: 'Kratom Blue',
+        prices: [
+            { volume: '100g', price: '100' },
+            { volume: '200g', price: '190' },
+            { volume: '500g', price: '450' },
+        ],
+        description: 'Kratom Blue is the best kratom in the world',
+        images: [{ alt: 'Kratom Blue', url: '/kratom_placeholder.webp' }],
         reviews: [],
         categories: [],
     }
@@ -175,7 +197,6 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
         : [...user.liked, productId]
 
     await updateDoc(doc(usersCollection, uid), { liked: newLiked })
-
 }
 
 const updateUsercart = async (uid: string, cart: cartItem[]): Promise<void> => {
@@ -199,6 +220,7 @@ const fb = {
     getBlog,
     deleteBlog,
     setBlog,
+    setUser,
     getLastBlogLimited,
     getAllBlogs,
     getProduct,

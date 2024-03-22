@@ -77,7 +77,7 @@ export default function User() {
                 })}
             </div>
 
-            <p>Casrd length: {user?.cart.length}</p>
+            {/* <p>Casrd length: {user?.cart[].amount}</p> */}
 
             <button onClick={handleLogOut}>Log out</button>
 
