@@ -70,7 +70,7 @@ export default function BurgerMobile() {
                             />
                             <p>{userName || 'User'}</p>
                         </div>
-                        {!user && (
+                        {!userName && (
                             <Link
                                 href={'/log-in'}
                                 className="hover:bg-hades-light flex items-center gap-3 rounded py-3 duration-0"
@@ -79,7 +79,7 @@ export default function BurgerMobile() {
                                 <p>Login</p>
                             </Link>
                         )}
-                        {user && (
+                        {userName && (
                             <div>
                                 <Link
                                     href={'/profile'}
@@ -116,18 +116,14 @@ export default function BurgerMobile() {
                                     <p>My Orders</p>
                                 </Link>
 
-                                {user && (
-                                    <>
-                                        <div className="bg-hades-light h-[1px] w-full" />
-                                        <button
-                                            onClick={handleLogout}
-                                            className="hover:bg-hades-light flex items-center gap-3 rounded py-3 duration-0"
-                                        >
-                                            <img src={'/icons/logout.svg'} className="h-6 w-6 rounded-full" />
-                                            <p>Logout</p>
-                                        </button>
-                                    </>
-                                )}
+                                <div className="bg-hades-light h-[1px] w-full" />
+                                <button
+                                    onClick={handleLogout}
+                                    className="hover:bg-hades-light flex items-center gap-3 rounded py-3 duration-0"
+                                >
+                                    <img src={'/icons/logout.svg'} className="h-6 w-6 rounded-full" />
+                                    <p>Logout</p>
+                                </button>
                             </div>
                         )}
 
