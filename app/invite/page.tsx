@@ -138,7 +138,7 @@ export default function Page() {
 
                     <button
                         disabled={invitorError ? true : false}
-                        className="h-10 rounded-md bg-hades_main text-white disabled:opacity-30"
+                        className="bg-hades-main h-10 rounded-md text-white disabled:opacity-30"
                         onClick={handleSubmit}
                     >
                         Sign up
@@ -146,7 +146,7 @@ export default function Page() {
                     <button
                         disabled={invitorError ? true : false}
                         onClick={handleGoogleSignIn}
-                        className="flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid border-hades_main disabled:opacity-30"
+                        className="border-hades-main flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid disabled:opacity-30"
                     >
                         <img src="/icons/google.svg" className="w-6" />
                         <p>Sign up with Google</p>

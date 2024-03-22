@@ -10,7 +10,7 @@ import fb from './tools/firebase/queries'
 const Page = () => (
     <>
         <Navbar />
-        <ContentWrapper type="default">
+        <ContentWrapper page type="default">
             <Component />
         </ContentWrapper>
         <Footer />

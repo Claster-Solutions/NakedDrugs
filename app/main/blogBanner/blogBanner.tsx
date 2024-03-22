@@ -25,7 +25,7 @@ export default function BlogBanner(p: Props) {
                             </div>
 
                             <p className="p-1">{blog.description}</p>
-                            <div className="ml-0 mt-4 flex h-10 w-4/12 items-center justify-center rounded bg-primary-hades_main text-white">
+                            <div className="bg-primary-hades-main ml-0 mt-4 flex h-10 w-4/12 items-center justify-center rounded text-white">
                                 <p className=" font-light">Číst dále</p>
                             </div>
                         </div>

@@ -4,10 +4,11 @@ interface Props {
     children: React.ReactNode
     type: 'none' | 'default' | 'article'
     tags?: string
+    page?: boolean
 }
 
 export default function ContentWrapper(p: Props) {
-    return <div className={`${getStyle(p.type)} ${p.tags}`}>{p.children}</div>
+    return <div className={`${getStyle(p.type)} ${p.tags} ${p.page ? 'min-h-[80vh]' : ''}`}>{p.children}</div>
 }
 
 const getStyle = (type: string) => {

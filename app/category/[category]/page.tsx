@@ -6,6 +6,7 @@ import ContentWrapper from '@/app/components/contentWrapper'
 import Filter from '../../components/filter'
 import { categoryOptions } from '@/types-exp'
 import ProductsListPage from '@/app/components/productsListPage'
+import Footer from '@/app/components/footer/footer'
 
 export async function generateStaticParams() {
     return categoryOptions.map((category) => {
@@ -19,10 +20,10 @@ export default async function Page({ params }: { params: { category: Category } 
     return (
         <>
             <Navbar />
-            <ContentWrapper type="default">
+            <ContentWrapper page type="default">
                 <ProductsListPage category={params.category} />
             </ContentWrapper>
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

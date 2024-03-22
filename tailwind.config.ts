@@ -33,9 +33,14 @@ const config: Config = {
             },
 
             colors: {
-                hades_main: '#323232',
-                hades: '#939393',
-                hades_light: '#E9E9E9',
+                // hades-main: '#323232',
+                // hades: '#939393',
+                // hades-light: '#E9E9E9',
+
+                hades: {
+                    main: '#323232',
+                    light: '#E9E9E9',
+                },
                 //will add when we decide on color theme
 
                 //* default colors

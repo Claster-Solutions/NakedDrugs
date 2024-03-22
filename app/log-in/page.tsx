@@ -71,12 +71,12 @@ export default function Page() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <button className="h-10 rounded-md bg-hades_main text-white" onClick={handleSubmit}>
+                    <button className="bg-hades-main h-10 rounded-md text-white" onClick={handleSubmit}>
                         Log in
                     </button>
                     <button
                         onClick={handleGoogleSignIn}
-                        className="flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid border-hades_main"
+                        className="border-hades-main flex h-10 items-center justify-center gap-2 rounded-md border-2 border-solid"
                     >
                         <img src="/icons/google.svg" className="w-6" />
                         <p>Sign up with Google</p>

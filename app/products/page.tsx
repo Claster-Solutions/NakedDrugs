@@ -11,10 +11,10 @@ export default async function Page() {
     return (
         <>
             <Navbar />
-            <ContentWrapper type="default">
+            <ContentWrapper type="default" page>
                 <ProductsListPage category="all" />
             </ContentWrapper>
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

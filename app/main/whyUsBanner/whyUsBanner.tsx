@@ -21,16 +21,11 @@ export default function WhyUsBanner() {
                             <div className="">
                                 <div
                                     style={{
-                                        boxShadow:
-                                            hoveredDiv === index
-                                                ? '0px 5px 10px 0px rgba(0, 0, 0, 0.5)'
-                                                : '',
+                                        boxShadow: hoveredDiv === index ? '0px 5px 10px 0px rgba(0, 0, 0, 0.5)' : '',
                                     }}
-                                    className="m-0 min-h-80 min-w-80 rounded-lg bg-primary-hades_light"
+                                    className="bg-primary-hades-light m-0 min-h-80 min-w-80 rounded-lg"
                                 ></div>
-                                <h3 className="text-md mx-0 py-2 font-bold uppercase">
-                                    {item.title}
-                                </h3>
+                                <h3 className="text-md mx-0 py-2 font-bold uppercase">{item.title}</h3>
                                 <p className=" mx-0">{item.text}</p>
                             </div>
                         </div>

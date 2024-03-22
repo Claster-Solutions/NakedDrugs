@@ -43,7 +43,7 @@ const Desktop = () => {
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
-                <input className="bg-primary-hades_light h-8 w-[35%] rounded-md" type="text" />
+                <input className="bg-primary-hades-light h-8 w-[35%] rounded-md" type="text" />
                 <User />
 
                 <Link className="flex gap-2" href={'/cart'}>

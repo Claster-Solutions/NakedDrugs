@@ -12,17 +12,13 @@ export default function HeroBanner() {
                     </p>
                 </div>
                 <Link
-                    className="ml-0 flex h-10 w-3/12 items-center justify-center rounded bg-primary-hades_main text-white"
+                    className="bg-primary-hades-main ml-0 flex h-10 w-3/12 items-center justify-center rounded text-white"
                     href={'/products'}
                 >
                     <p className="font-light">Koupit</p>
                 </Link>
             </div>
-            <img
-                className="w-6/12 rounded-lg object-cover"
-                src={ProductImage.src}
-                alt="banner kratom vesmír"
-            ></img>
+            <img className="w-6/12 rounded-lg object-cover" src={ProductImage.src} alt="banner kratom vesmír"></img>
             {/* need to change this  */}{' '}
         </div>
     )
