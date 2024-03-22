@@ -31,7 +31,7 @@ export default function Product(p: Props) {
     }, [])
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-20">
             <div className="">
                 <img src={product.images[0].url} alt={product.images[0].alt} className="w-1/2" />
             </div>
