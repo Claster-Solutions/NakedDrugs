@@ -3,7 +3,6 @@ import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'
 import ContentFormatter from '../contentFormatter/contentFormatter'
 import fb from '../tools/firebase/queries'
-import BlogCard from './components/blogCard'
 import YearDropdown from './components/yearDropdown'
 
 const Page = () => (

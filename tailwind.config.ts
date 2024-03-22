@@ -8,6 +8,12 @@ const config: Config = {
     ],
     theme: {
         extend: {
+
+            //all directions box shadow
+            boxShadow: {
+                'custom': '0px 5px 15px 0px rgba(0,0,0,0.1)',
+            },
+
             backgroundImage: {
                 'footer-texture': "url('/img/footer-texture.png')",
             },
@@ -25,23 +31,22 @@ const config: Config = {
                 '5xl': '3rem', // 5x extra large
                 '6xl': '4rem', // 6x extra large
             },
-        },
-        colors: {
-            primary: {
+
+            colors: {
                 hades_main: '#323232',
                 hades: '#939393',
                 hades_light: '#E9E9E9',
                 //will add when we decide on color theme
-            },
 
-            //* default colors
-            green: '#349934',
-            blue: '#0000ff',
-            red: '#ff0000',
-            yellow: '#ffff00',
-            white: '#ffffff',
-            black: '#000000',
-            gray: '#808080',
+                //* default colors
+                green: '#349934',
+                blue: '#0000ff',
+                red: '#ff0000',
+                yellow: '#ffff00',
+                white: '#ffffff',
+                black: '#000000',
+                gray: '#808080',
+            },
         },
     },
     plugins: [],

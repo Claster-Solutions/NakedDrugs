@@ -1,9 +1,9 @@
 'use client'
 import clasterConfig from '@/claster-confing'
-import { auth } from '@/app/tools/firebase/main'
-import fb from '@/app/tools/firebase/queries'
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
+import { auth } from '../tools/firebase/main'
+import fb from '../tools/firebase/queries'
 
 export default function User() {
     const [user, setUser] = useState<User | null>(null)
@@ -26,9 +26,11 @@ export default function User() {
     }, [])
 
     const handleCopyReferalLink = () => {
-        navigator.clipboard.writeText(
-            `${clasterConfig.websiteRootUrl}/invite?user=${user?.id}`,
-        )
+        navigator.clipboard.writeText(`${clasterConfig.websiteRootUrl}/invite?user=${user?.id}`)
+    }
+
+    const handleLogOut = () => {
+        auth.signOut()
     }
 
     if (authenticated === null) {
@@ -44,7 +46,14 @@ export default function User() {
             <p>id: {user?.id}</p>
             <p>name: {user?.name}</p>
             <p>email: {user?.email}</p>
-            <img src={user?.photoURL} alt="User photo" width={18} height={18} />
+            <img
+                referrerPolicy="no-referrer"
+                src={user?.photoURL}
+                alt="User photo"
+                width={18}
+                height={18}
+                onError={(e: any) => (e.target.src = '/icons/user.png')}
+            />
 
             <p>Liked: </p>
             <div className="flex flex-col">
@@ -69,6 +78,8 @@ export default function User() {
             </div>
 
             <p>Casrd length: {user?.cart.length}</p>
+
+            <button onClick={handleLogOut}>Log out</button>
 
             <h2>Referal link:</h2>
             <p>{`${clasterConfig.websiteRootUrl}/invite?user=${user?.id}`}</p>

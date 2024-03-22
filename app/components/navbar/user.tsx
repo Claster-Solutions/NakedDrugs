@@ -26,26 +26,24 @@ export default function User() {
 
     if (authenticated === null) {
         return (
-            <Link className="flex flex-row items-center font-light" href={'/signIn'}>
-                <img src={ProfileIcon.src} />
-                <p>Sign In</p>
+            <Link className="flex flex-row items-center font-light" href={'/log-in'}>
+                <img referrerPolicy="no-referrer" src={ProfileIcon.src} />
+                <p>Log In</p>
             </Link>
         )
     }
     if (authenticated === false) {
         return (
-            <Link
-                className="flex flex-row items-center gap-2 font-light"
-                href={'/signIn'}
-            >
-                <img src={ProfileIcon.src} />
-                <p>Sign In</p>
+            <Link className="flex flex-row items-center gap-2 font-light" href={'/log-in'}>
+                <img referrerPolicy="no-referrer" src={ProfileIcon.src} />
+                <p>Log In</p>
             </Link>
         )
     }
     return (
         <Link href={'/profile'} className=" flex flex-row gap-2 p-2">
             <img
+                referrerPolicy="no-referrer"
                 src={userPhotoURL}
                 alt="User photo"
                 className="rounded-xl"

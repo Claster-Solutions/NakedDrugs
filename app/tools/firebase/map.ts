@@ -1,15 +1,17 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore'
 
-// const user = (doc: DocumentData): User => {
-//     const data = doc.data()
-//     return {
-//         id: doc.id,
-//         name: data.name,
-//         email: data.email,
-//     }
-// }
 const user = (doc: DocumentData): User => {
     const data = doc.data()
+
+    const orders: Order[] = data.orders.map((order: any) => {
+        return {
+            id: order.id,
+            state: order.state,
+            date: order.date.toDate(),
+            items: order.items,
+        }
+    })
+
     return {
         id: doc.id,
         email: data.email,
@@ -20,10 +22,12 @@ const user = (doc: DocumentData): User => {
         referals: data.referals,
         referal: data.referal,
         purchasesCount: data.purchasesCount,
+        orders,
+        invoiceData: data.invoiceData || null,
     }
 }
 const blogEvent = (
-    doc: DocumentSnapshot<DocumentData, DocumentData>,
+    doc: DocumentData
 ): BlogEvent | undefined => {
     if (!doc.exists()) {
         return undefined
@@ -43,15 +47,28 @@ const blogEvent = (
 const product = (doc: DocumentData): Product => {
     const data = doc.data()
 
-    const newProduct: Product = {
+    const reviews: Review[] = data.reviews.map((review: any) => {
+        return {
+            userId: review.userId,
+            name: review.name,
+            photoURL: review.photoURL,
+            date: review.date.toDate(),
+            text: review.text,
+            rate: review.rate,
+        }
+    })
+
+    const product: Product = {
         id: doc.id,
         name: data.name,
-        prices: data.price,
+        prices: data.prices,
         description: data.description,
         images: data.images,
+        reviews,
+        categories: data.categories,
     }
 
-    return newProduct
+    return product
 }
 
 const map = {

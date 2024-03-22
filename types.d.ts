@@ -7,22 +7,63 @@ interface User {
     referals: string[]
     referal: string
     purchasesCount: number
-    cart: CartItem[]
+    cart: cartItem[]
+    orders: Order[]
+    invoiceData: Invoice?
 }
 
-interface CartItem {
+type Category = "all" | "cars" | "spaceships" | "animals" | "plants";
+
+interface cartItem {
     id: string
-    name: string
+    productId: string
+    productName: string
     amount: number
     price: ProductPrice
+    productImage: string
+}
+interface Order {
+    items: cartItem[]
+    id: string
+    state: "pending" | "paid" | "shipped" | "delivered" | "canceled"
+    date: Date
+    invoice: Invoice
+    deliveryAddress: string
+    note: string
 }
 
+interface Invoice {
+    name: string
+    lastName: string
+    email: string
+    phone: string
+    street: string
+    city: string
+    zip: string
+    country: string
+    company: Company?
+}
+interface Company {
+    companyName: string
+    IC: string
+    DIC: string
+}
 interface Product {
     id: string
     name: string
     prices: ProductPrice[]
     description: string
     images: ProductImage[]
+    reviews: Review[]
+    categories: Category[]
+}
+interface Review {
+    userId: string
+    name: string
+    photoURL: string
+    date: Date
+    text: string
+    rate: 1 | 2 | 3 | 4 | 5
 }
 interface ProductImage {
     alt: string

@@ -6,11 +6,12 @@ import {
     getDoc,
     getDocs,
     orderBy,
-    query,
+    query as firebaseQuery,
     setDoc,
     updateDoc,
     limit,
     deleteDoc,
+    where,
 } from 'firebase/firestore'
 
 // const getUserInfo = async (uid: string): Promise<User> => {
@@ -50,18 +51,13 @@ const createUser = async (
         cart: [],
         liked: [],
         referals: [],
+        orders: [],
+        invoiceData: null,
     }
 
     await setDoc(doc(usersCollection, newUser.id), newUser)
 }
-const addToUserCart = async (uid: string, product: Product): Promise<void> => {
-    const user = await getUser(uid)
-    if (user === null) {
-        throw new Error('User not found')
-    }
-    const newCart = [...user.cart, product]
-    await updateDoc(doc(usersCollection, uid), { card: newCart })
-}
+
 const getImage = (id: string): string => {
     return 'image avalible after push'
     //return `www.oururl.com/images?id=${id}`
@@ -77,9 +73,7 @@ const getAllBlogs = async (): Promise<AllBlogs[]> => {
     //* Group objects by categoryName
     const result: AllBlogs[] = []
     blogEvents.forEach((blog) => {
-        const index = result.findIndex(
-            (category) => category.categoryName === blog.categoryName,
-        )
+        const index = result.findIndex((category) => category.categoryName === blog.categoryName)
         if (index === -1) {
             result.push({
                 categoryName: blog.categoryName,
@@ -121,15 +115,11 @@ const deleteBlog = async (id: string): Promise<void> => {
 }
 
 const setBlog = async (event: BlogEvent): Promise<void> => {
-    console.log(event)
     await setDoc(doc(blogCollection, event.id), { ...event, updatedAt: new Date() })
-    console.log('done')
 }
 
 const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
-    const snap = await getDocs(
-        query(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
-    )
+    const snap = await getDocs(firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)))
     const mapped = snap.docs.map((doc) => map.blogEvent(doc))
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
 }
@@ -147,11 +137,23 @@ const getProduct = async (id: string): Promise<Product> => {
 const getAllProducts = async (): Promise<Product[]> => {
     const snap = await getDocs(productCollection)
 
-    //* Map docs to ActionEvents
-    const products: Product[] = snap.docs
-        .map((doc) => map.product(doc))
-        .filter((product) => product !== undefined) as Product[]
-    return products
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
+}
+
+const getProductsByCategory = async (category: Category): Promise<Product[]> => {
+    const allProducts = await getAllProducts()
+    return allProducts.filter((product) => product.categories.includes(category))
+}
+
+const updateProduct = async (product: Product): Promise<void> => {
+    await setDoc(doc(productCollection, product.id), product)
+}
+
+const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
+    const query = firebaseQuery(productCollection, where('id', 'in', ids))
+    const snap = await getDocs(query)
+
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
 }
 
 //! TEMP
@@ -166,6 +168,8 @@ const addNewProduct = async (): Promise<void> => {
         ],
         description: 'Kratom Blue is the best kratom in the world',
         images: [{ alt: 'Kratom Blue', url: '/kratom_placeholder.webp' }],
+        reviews: [],
+        categories: [],
     }
     await setDoc(doc(productCollection, newProduct.id), newProduct)
 }
@@ -181,20 +185,24 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
     await updateDoc(doc(usersCollection, uid), { liked: newLiked })
 }
 
-const addCartItem = async (uid: string, cartItem: CartItem): Promise<void> => {
-    const user = await getUser(uid)
-    if (user === null) return
+const updateUsercart = async (uid: string, cart: cartItem[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { cart })
+}
 
-    console.log(user)
+const updateUserOrders = async (uid: string, orders: Order[]): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { orders })
+}
 
-    const newCart = [...user.cart, cartItem]
-    await updateDoc(doc(usersCollection, uid), { cart: newCart })
+const updateUserInvoiceData = async (uid: string, invoiceData: Invoice): Promise<void> => {
+    await updateDoc(doc(usersCollection, uid), { invoiceData })
 }
 
 const fb = {
+    updateUserOrders,
     getImage,
     getUser,
     createUser,
+    updateUsercart,
     getBlog,
     deleteBlog,
     setBlog,
@@ -206,6 +214,9 @@ const fb = {
     getAllProducts,
     addNewProduct,
     toggleUserLike,
-    addCartItem,
+    getProductsByIDs,
+    updateProduct,
+    updateUserInvoiceData,
+    getProductsByCategory,
 }
 export default fb

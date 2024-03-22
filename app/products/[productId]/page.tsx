@@ -1,29 +1,21 @@
-import { notFound } from 'next/navigation'
 import ContentWrapper from '../../components/contentWrapper'
 import Footer from '../../components/footer/footer'
 import Navbar from '../../components/navbar/navbar'
 import fb from '@/app/tools/firebase/queries'
-import Link from 'next/link'
-import { Metadata } from 'next/dist/lib/metadata/types/metadata-interface'
-import { Karantina } from 'next/font/google'
-import Amount from './components/amount'
-import Dropdown from './components/dropdownn'
-import Like from './components/like'
-import Cart from './components/cart'
 import Product from './components/product'
 
 export async function generateStaticParams() {
     const products = await fb.getAllProducts()
-    const produkty = products.map((produkt) => {
+    const productsMapped = products.map((product) => {
         return {
-            produktId: produkt.id,
+            productId: product.id,
         }
     })
-    return produkty.flat()
+    return productsMapped.flat()
 }
 
-const Page = async ({ params }: { params: { produktId: string } }) => {
-    const product = await fb.getProduct(params.produktId)
+const Page = async ({ params }: { params: { productId: string } }) => {
+    const product = await fb.getProduct(params.productId)
 
     return (
         <>

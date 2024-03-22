@@ -1,5 +1,5 @@
 'use client'
-import CartIcon from '@/public/icons/cart.svg'
+import cartIcon from '@/public/icons/cart.svg'
 import Image from 'next/image'
 import Logo from '@/public/brand/emoji-logo.jpg'
 import Link from 'next/link'
@@ -13,11 +13,7 @@ import fb from '@/app/tools/firebase/queries'
 const Navbar = () => (
     <div className="z-50">
         <div className="sup h-32 w-full" />
-        <ContentWrapper
-            verticalPadding={false}
-            type="default"
-            tags="bg-white text-black shadow-xl fixed w-full top-0 left-0 z-50"
-        >
+        <ContentWrapper type="default" tags="bg-white text-black shadow-xl fixed w-full top-0 left-0 z-50">
             <Component />
         </ContentWrapper>
     </div>
@@ -38,8 +34,8 @@ const Desktop = () => {
         <div className="flex h-32 w-full flex-col items-center justify-center gap-2">
             <div className="flex w-full flex-row items-center justify-between">
                 <Link href="/" className="w-14">
-                    <Image
-                        src={Logo}
+                    <img
+                        src={Logo.src}
                         alt="Naked drugs logo"
                         width="0"
                         height="0"
@@ -47,19 +43,11 @@ const Desktop = () => {
                         style={{ width: '100%', height: 'auto' }}
                     />
                 </Link>
-                <input
-                    className="h-8 w-[35%] rounded-md bg-primary-hades_light"
-                    type="text"
-                />
+                <input className="bg-primary-hades_light h-8 w-[35%] rounded-md" type="text" />
                 <User />
 
                 <Link className="flex gap-2" href={'/cart'}>
-                    <Image
-                        src={CartIcon.src}
-                        alt="Instagram icon"
-                        width={18}
-                        height={18}
-                    />
+                    <img src={cartIcon.src} alt="Instagram icon" width={18} height={18} />
                     <p>Košík</p>
                 </Link>
             </div>
@@ -70,7 +58,6 @@ const Desktop = () => {
             </div>
             <div className="flex w-full items-center justify-between gap-4">
                 <div className="sup" />
-                {/* <Image src={XLogo} alt="X icon" width={18} height={18} /> */}
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import ContentWrapper from '../contentWrapper'
 
 const Footer = () => (
-    <ContentWrapper verticalPadding={false} type="default" tags="shadow-all">
+    <ContentWrapper type="default" tags="shadow-all">
         <Component />
     </ContentWrapper>
 )
