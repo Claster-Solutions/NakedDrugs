@@ -9,10 +9,14 @@ interface Props {
 export default function BlogBanner(p: Props) {
     const date = new Date(Number(p.Blog[0].date))
     return (
-        <div className="flex flex-col items-center justify-evenly">
+        <div className="mb-4">
             {p.Blog.map((blog, index) => {
                 return (
-                    <Link key={index} href={`/blog/${blog.id}`} className="mx-[7%] flex flex-row  rounded-xl">
+                    <Link
+                        key={index}
+                        href={`/blog/${blog.id}`}
+                        className="justify-bettween flex  w-full flex-row  rounded-xl"
+                    >
                         <img
                             src={Blog.src}
                             alt="obrázek productu - kratom"
@@ -20,7 +24,7 @@ export default function BlogBanner(p: Props) {
                         />
                         <div className="ml-10 flex flex-col ">
                             <div className="flex items-center gap-4  ">
-                                <p className=" p-2 text-2xl font-semibold ">{blog.title}</p>
+                                <h4 className=" text-3xl font-semibold ">{blog.title}</h4>
                                 <p className=" font-light">{format.dateShort(date)}</p>
                             </div>
 
