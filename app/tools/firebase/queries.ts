@@ -151,7 +151,7 @@ const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
 }
 
 //! TEMP
-const addNewProduct = async (): Promise<void> => {
+const addNewProduct = async (product: Product): Promise<void> => {
     const newProduct: Product = {
         id: 'KratomBlue',
         name: 'Kratom Blue',
@@ -165,7 +165,7 @@ const addNewProduct = async (): Promise<void> => {
         reviews: [],
         categories: [],
     }
-    await setDoc(doc(productCollection, newProduct.id), newProduct)
+    await setDoc(doc(productCollection, newProduct.id), product)
 }
 
 const toggleUserLike = async (uid: string, productId: string): Promise<void> => {
