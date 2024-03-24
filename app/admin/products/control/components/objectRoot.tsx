@@ -31,40 +31,6 @@ const objectRoot = () => {
     const [object, setObject] = useState<Product>(newProducts())
     const [isIdEntered, setIsIdEntered] = useState<boolean>(false)
 
-    const handleObjectChange = (e: any, field: string, index?: number) => {
-        let newObject: Product = { ...p.product }
-        switch (field) {
-            case 'name':
-                newObject = { ...newObject, id: e.target.value }
-                newObject = { ...newObject, name: e.target.value }
-                break
-            case 'price20':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '20g' }, ...newObject.prices.slice(0)],
-                }
-                break
-            case 'price100':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '100g' }, ...newObject.prices.slice(1)],
-                }
-                break
-            case 'price500':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '500g' }, ...newObject.prices.slice(2)],
-                }
-                break
-            case 'description':
-                newObject = { ...newObject, description: e.target.value }
-                break
-            case 'categories':
-                newObject = { ...newObject, categories: e.target.value }
-                break
-        }
-        p.setObject(newObject)
-    }
     const handleSubmition = async () => {
         await fb.setProduct(object)
         alert('Akce byla úspěšně přidána.')

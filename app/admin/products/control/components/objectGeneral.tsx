@@ -21,42 +21,30 @@ const getProduct = async (): Promise<Product | null> => {
     return null
 }
 const objectRoot = (p: Props) => {
-    const handleObjectChange = (e: any, field: string, index?: number) => {
-        let newObject: Product = { ...p.product }
-        switch (field) {
-            case 'name':
-                newObject = { ...newObject, id: e.target.value }
-                newObject = { ...newObject, name: e.target.value }
-                break
-            case 'price20':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '10g' }, ...newObject.prices.slice(0)],
-                }
-                break
-            case 'price100':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '100g' }, ...newObject.prices.slice(1)],
-                }
-                break
-            case 'price500':
-                newObject = {
-                    ...newObject,
-                    prices: [{ price: e.target.value, volume: '1000g' }, ...newObject.prices.slice(2)],
-                }
-                break
-            case 'description':
-                newObject = { ...newObject, description: e.target.value }
-                break
-            case 'categories':
-                newObject = { ...newObject, categories: e.target.value }
-                break
-        }
-        p.setObject(newObject)
-    }
     const handleSubmition = async () => {
-        await fb.setProduct(p.product)
+        const newProduct: Product = {
+            id: p.product.id,
+            name: name,
+            prices: [
+                {
+                    price: price10.toString(),
+                    volume: '10',
+                },
+                {
+                    price: price100.toString(),
+                    volume: '100',
+                },
+                {
+                    price: price1000.toString(),
+                    volume: '1000',
+                },
+            ],
+            description: description,
+            images: p.product.images,
+            reviews: p.product.reviews,
+            categories: categories.split(','), //f fix it
+        }
+        await fb.setProduct(newProduct)
         alert('Akce byla úspěšně přidána.')
     }
 
@@ -75,6 +63,13 @@ const objectRoot = (p: Props) => {
         fetchData()
     }, [])
 
+    const [price10, setPrice10] = useState<number>(0)
+    const [price100, setPrice100] = useState<number>(0)
+    const [price1000, setPrice1000] = useState<number>(0)
+    const [name, setName] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+    const [categories, setCategories] = useState<string>('')
+
     return (
         <div>
             <form action="">
@@ -82,54 +77,54 @@ const objectRoot = (p: Props) => {
                     className="w-full rounded p-1 text-lg"
                     placeholder={'name'}
                     type={'text'}
-                    value={p.product.name}
+                    value={name}
                     onChange={(e) => {
-                        handleObjectChange(e, 'name')
+                        setName(e.target.value)
                     }}
                 />
                 <input
                     className="w-full rounded p-1 text-lg"
                     placeholder={'price for 1000g'}
                     type={'text'}
-                    value={p.product.prices[0]?.price}
+                    value={price1000}
                     onChange={(e) => {
-                        handleObjectChange(e, 'price1000')
+                        setPrice1000(Number(e.target.value))
                     }}
                 />
                 <input
                     className="w-full rounded p-1 text-lg"
                     placeholder={'price for 100g'}
                     type={'text'}
-                    value={p.product.prices[1]?.price}
+                    value={price100}
                     onChange={(e) => {
-                        handleObjectChange(e, 'price100')
+                        setPrice100(Number(e.target.value))
                     }}
                 />
                 <input
                     className="w-full rounded p-1 text-lg"
                     placeholder={'price for 10g'}
                     type={'text'}
-                    value={p.product.prices[2]?.price}
+                    value={price10}
                     onChange={(e) => {
-                        handleObjectChange(e, 'price10')
+                        setPrice10(Number(e.target.value))
                     }}
                 />
                 <input
                     className="w-full rounded p-1 text-lg"
                     placeholder={'description'}
                     type={'text'}
-                    value={p.product.description}
+                    value={description}
                     onChange={(e) => {
-                        handleObjectChange(e, 'description')
+                        setDescription(e.target.value)
                     }}
                 />
                 <input
                     className="w-full rounded p-1 text-lg"
                     placeholder={'categories - all'}
                     type={'text'}
-                    value={p.product.categories}
+                    value={categories}
                     onChange={(e) => {
-                        handleObjectChange(e, 'categories')
+                        setCategories(e.target.value)
                     }}
                 />
                 <button onClick={handleSubmition}>přidat produkt</button>
