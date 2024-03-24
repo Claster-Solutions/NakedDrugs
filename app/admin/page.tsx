@@ -3,6 +3,7 @@ import ContentWrapper from '../components/contentWrapper'
 import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'
 import Login from './components/login'
+import Link from 'next/link'
 
 {
     /* <Login children={children} /> */
@@ -31,6 +32,12 @@ export default function Page() {
                 </div>
 
                 {/* <AdminToolsList /> */}
+                <Link href="/admin/blog" className=" text-xl underline">
+                    Blog
+                </Link>
+                <Link href="/admin/products" className="text-xl underline">
+                    Products
+                </Link>
 
                 <div className="flex flex-col">
                     <p className="f2 font-medium">Kontakt</p>

@@ -12,3 +12,16 @@ type BlogEvent = {
     date: Date
     content: Content[]
 }
+type AllProducts = {
+    products: Product[]
+}
+
+type Product = {
+    id: string
+    name: string
+    prices: ProductPrice[]
+    description: string
+    images: ProductImage[]
+    reviews: Review[]
+    categories: Category[]
+}
