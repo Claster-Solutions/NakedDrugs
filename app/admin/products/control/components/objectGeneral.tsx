@@ -13,17 +13,18 @@ const getProduct = async (): Promise<Product | null> => {
     if (productId) {
         const product = await fb.getProduct(productId)
         if (!event) {
-            localStorage.removeItem('eventId')
+            localStorage.removeItem('Id')
             return null
         }
         return product
     }
     return null
 }
-const objectRoot = (p: Props) => {
+const ObjectRoot = (p: Props) => {
     const handleSubmition = async () => {
+        console.log('submited')
         const newProduct: Product = {
-            id: p.product.id,
+            id: name,
             name: name,
             prices: [
                 {
@@ -40,12 +41,19 @@ const objectRoot = (p: Props) => {
                 },
             ],
             description: description,
-            images: p.product.images,
-            reviews: p.product.reviews,
-            categories: categories.split(','), //f fix it
+            images: [
+                {
+                    url: '/images/kratom-red.webp',
+                    alt: 'fotka',
+                },
+            ],
+            reviews: [],
+            categories: ['all'],
         }
+        console.log(newProduct)
         await fb.setProduct(newProduct)
-        alert('Akce byla úspěšně přidána.')
+        console.log('product added')
+        alert('úspěšně přidáno.')
     }
 
     useEffect(() => {
@@ -127,10 +135,12 @@ const objectRoot = (p: Props) => {
                         setCategories(e.target.value)
                     }}
                 />
-                <button onClick={handleSubmition}>přidat produkt</button>
+                <button className="h-6 w-4 border border-solid" onClick={handleSubmition}>
+                    přidat produkt
+                </button>
             </form>
         </div>
     )
 }
 
-export default objectRoot
+export default ObjectRoot

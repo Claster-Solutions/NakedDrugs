@@ -18,8 +18,8 @@ const getProduct = async (): Promise<Product | null> => {
     const productId = localStorage.getItem('Id')
     if (productId) {
         const product = await fb.getProduct(productId)
-        if (!event) {
-            localStorage.removeItem('eventId')
+        if (!product) {
+            localStorage.removeItem('Id')
             return null
         }
         return product
@@ -27,14 +27,9 @@ const getProduct = async (): Promise<Product | null> => {
     return null
 }
 
-const objectRoot = () => {
+const ObjectRoot = () => {
     const [object, setObject] = useState<Product>(newProducts())
     const [isIdEntered, setIsIdEntered] = useState<boolean>(false)
-
-    const handleSubmition = async () => {
-        await fb.setProduct(object)
-        alert('Akce byla úspěšně přidána.')
-    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,4 +58,4 @@ const objectRoot = () => {
     )
 }
 
-export default objectRoot
+export default ObjectRoot
