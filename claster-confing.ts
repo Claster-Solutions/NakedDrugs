@@ -7,9 +7,9 @@ interface ClasterConfig {
     }[]
 }
 
-const clasterConfig: ClasterConfig = {
+export const clasterConfig: ClasterConfig = {
     websiteRootUrl: 'https://naked-drugs.web.app',
     gitRepoSignature: '',
     emailRecipients: [],
 }
-export default clasterConfig
+// export default clasterConfig

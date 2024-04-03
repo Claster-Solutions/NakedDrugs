@@ -1,9 +1,9 @@
 'use client'
-import clasterConfig from '@/claster-confing'
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../tools/firebase/main'
 import fb from '../tools/firebase/queries'
+import { clasterConfig } from '@/claster-confing'
 
 export default function User() {
     const [user, setUser] = useState<User | null>(null)

@@ -21,7 +21,7 @@ const Component = async () => {
 
     return (
         <div>
-            <h1>BLOG</h1>
+            <h1 className=" text-3xl font-bold">Blog</h1>
             {allblog.map((blog, index) => (
                 <>
                     <YearDropdown key={index} blogs={blog} index={0} />

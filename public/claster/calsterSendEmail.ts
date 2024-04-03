@@ -1,6 +1,4 @@
-import clasterConfig from "@/claster-config"
-
-
+import { clasterConfig } from '@/claster-confing'
 
 interface Data {
     key: string

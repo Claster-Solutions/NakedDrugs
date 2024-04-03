@@ -40,8 +40,8 @@ const Content = async (p: Props) => {
     const date = new Date(Number(blog.date))
     return (
         <div>
-            <h1 className=" text-5xl font-semibold uppercase tracking-wide">{blog.title}</h1>
-            <p>{format.dateShort(date)}</p>
+            <h1 className=" text-5xl font-semibold tracking-wide">{blog.title}</h1>
+            <p className="text-xl font-thin">{format.dateShort(date)}</p>
             <ContentFormatter content={blog.content} />
         </div>
     )
