@@ -61,9 +61,7 @@ const getAllBlogs = async (): Promise<AllBlogs[]> => {
     //* Group objects by categoryName
     const result: AllBlogs[] = []
     blogEvents.forEach((blog) => {
-        const index = result.findIndex(
-            (category) => category.categoryName === blog.categoryName,
-        )
+        const index = result.findIndex((category) => category.categoryName === blog.categoryName)
         if (index === -1) {
             result.push({
                 categoryName: blog.categoryName,
@@ -109,9 +107,7 @@ const setBlog = async (event: BlogEvent): Promise<void> => {
 }
 
 const getLastBlogLimited = async (limitInt: number): Promise<BlogEvent[]> => {
-    const snap = await getDocs(
-        firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)),
-    )
+    const snap = await getDocs(firebaseQuery(blogCollection, orderBy('date', 'desc'), limit(limitInt)))
     const mapped = snap.docs.map((doc) => map.blogEvent(doc))
     return mapped.filter((event) => event !== undefined) as BlogEvent[]
 }
@@ -129,9 +125,13 @@ const getProduct = async (id: string): Promise<Product> => {
 const getAllProducts = async (): Promise<Product[]> => {
     const snap = await getDocs(productCollection)
 
-    return snap.docs
-        .map((doc) => map.product(doc))
-        .filter(Boolean)
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
+}
+const setProduct = async (product: Product): Promise<void> => {
+    await setDoc(doc(productCollection, product.id), product)
+}
+const deleteProduct = async (id: string): Promise<void> => {
+    await deleteDoc(doc(productCollection, id))
 }
 
 const getProductsByCategory = async (category: Category): Promise<Product[]> => {
@@ -144,26 +144,28 @@ const updateProduct = async (product: Product): Promise<void> => {
 }
 
 const getProductsByIDs = async (ids: string[]): Promise<Product[]> => {
-    const query = firebaseQuery(productCollection, where("id", "in", ids));
+    const query = firebaseQuery(productCollection, where('id', 'in', ids))
     const snap = await getDocs(query)
 
-    return snap.docs
-        .map((doc) => map.product(doc))
-        .filter(Boolean)
+    return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
 }
 
 //! TEMP
-const addNewProduct = async (): Promise<void> => {
+const addNewProduct = async (product: Product): Promise<void> => {
     const newProduct: Product = {
-        id: "KratomBlue",
-        name: "Kratom Blue",
-        prices: [{ volume: "100g", price: "100" }, { volume: "200g", price: "190" }, { volume: "500g", price: "450" }],
-        description: "Kratom Blue is the best kratom in the world",
-        images: [{ alt: "Kratom Blue", url: "/kratom_placeholder.webp" }],
+        id: 'KratomBlue',
+        name: 'Kratom Blue',
+        prices: [
+            { volume: '100g', price: '100' },
+            { volume: '200g', price: '190' },
+            { volume: '500g', price: '450' },
+        ],
+        description: 'Kratom Blue is the best kratom in the world',
+        images: [{ alt: 'Kratom Blue', url: '/kratom_placeholder.webp' }],
         reviews: [],
         categories: [],
     }
-    await setDoc(doc(productCollection, newProduct.id), newProduct)
+    await setDoc(doc(productCollection, newProduct.id), product)
 }
 
 const toggleUserLike = async (uid: string, productId: string): Promise<void> => {
@@ -175,7 +177,6 @@ const toggleUserLike = async (uid: string, productId: string): Promise<void> => 
         : [...user.liked, productId]
 
     await updateDoc(doc(usersCollection, uid), { liked: newLiked })
-
 }
 
 const updateUsercart = async (uid: string, cart: cartItem[]): Promise<void> => {
@@ -202,6 +203,8 @@ const fb = {
     getLastBlogLimited,
     getAllBlogs,
     getProduct,
+    setProduct,
+    deleteProduct,
     setImage,
     getAllProducts,
     addNewProduct,

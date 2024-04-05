@@ -6,6 +6,7 @@ import Product from './components/product'
 
 export async function generateStaticParams() {
     const products = await fb.getAllProducts()
+    console.log(products)
     const productsMapped = products.map((product) => {
         return {
             productId: product.id,

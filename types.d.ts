@@ -12,7 +12,7 @@ interface User {
     invoiceData: Invoice?
 }
 
-type Category = "all" | "cars" | "spaceships" | "animals" | "plants";
+type Category = 'all' | 'cars' | 'spaceships' | 'animals' | 'plants'
 
 interface cartItem {
     id: string
@@ -25,7 +25,7 @@ interface cartItem {
 interface Order {
     items: cartItem[]
     id: string
-    state: "pending" | "paid" | "shipped" | "delivered" | "canceled"
+    state: 'pending' | 'paid' | 'shipped' | 'delivered' | 'canceled'
     date: Date
     invoice: Invoice
     deliveryAddress: string
@@ -47,6 +47,9 @@ interface Company {
     companyName: string
     IC: string
     DIC: string
+}
+interface AllProducts {
+    products: Product[]
 }
 interface Product {
     id: string

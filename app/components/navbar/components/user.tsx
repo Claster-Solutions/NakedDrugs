@@ -1,7 +1,7 @@
 'use client'
 import { auth } from '@/app/tools/firebase/main'
 import fb from '@/app/tools/firebase/queries'
-import clasterConfig from '@/claster-confing'
+import { clasterConfig } from '@/claster-confing'
 import { onAuthStateChanged } from 'firebase/auth'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
@@ -65,41 +65,41 @@ export default function User() {
                 <div className="flex flex-col rounded bg-white shadow-md">
                     <Link
                         href={'/profile'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src={'/icons/user.svg'} className="h-6 w-6 rounded-full" />
                         <p>My Profile</p>
                     </Link>
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
 
                     <Link
                         href={'/orders'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/orders.svg" className="h-6 w-6" />
                         <p>My Orders</p>
                     </Link>
 
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
                     <Link
                         href={'/liked'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/heart.svg" className="h-6 w-6" />
                         <p>My Liked</p>
                     </Link>
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
                     <Link
                         href={'/cart'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/cart.svg" className="h-6 w-6" />
                         <p>My Cart</p>
                     </Link>
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
                     <Link
                         href={'/logout'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/logout.svg" className="h-6 w-6" />
                         <p>Logout</p>
