@@ -27,8 +27,13 @@ export default function Cart(p: Props) {
     }
 
     return (
-        <div>
-            <button onClick={handleAddTocart}>Add to cart</button>
+        <div className="flex items-center justify-center">
+            <button
+                className="h-10 w-full rounded-lg  border border-solid  bg-hades-main p-0 text-sm font-light text-white"
+                onClick={handleAddTocart}
+            >
+                Add to cart
+            </button>
         </div>
     )
 }

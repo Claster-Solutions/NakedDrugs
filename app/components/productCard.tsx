@@ -19,7 +19,7 @@ export default function ProductCard(p: Props) {
 
     const handleLikeButton = () => {
         if (!isLiked) {
-            fb.toggleUserLike(user?.id || '', p.product.id)
+            fb.toggleUserLike(user?.id || '', p.product.id) //i know that this is the problem bro just didnt know how to do it plus no chackra
         }
         setIsLiked(!isLiked)
     }
@@ -75,5 +75,5 @@ export default function ProductCard(p: Props) {
                 </div>
             </div>
         </div>
-    )
+  )
 }

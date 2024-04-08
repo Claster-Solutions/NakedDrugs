@@ -31,20 +31,28 @@ export default function Product(p: Props) {
     }, [])
 
     return (
-        <div className="flex flex-col pt-20">
-            <div className="">
+        <div className="flex flex-col  pt-20">
+            <div className="flex flex-row">
+                <div className=" flex w-52 flex-col items-end justify-end gap-1">
+                    <img src={product.images[0].url} alt={product.images[0].alt} className="w-full" />
+                    <img src={product.images[0].url} alt={product.images[0].alt} className="w-full" />
+                    <img src={product.images[0].url} alt={product.images[0].alt} className="w-full" />
+                    {/* on button click make the image bmain image and ... */}
+                </div>
                 <img src={product.images[0].url} alt={product.images[0].alt} className="w-1/2" />
             </div>
-            <div className="absolute right-40 flex flex-col justify-center gap-5">
+            <div className="absolute right-40 flex flex-col justify-center gap-4">
                 <h1 className=" text-5xl font-semibold ">{product.name}</h1>
-                <Like productId={product.id} user={user} />
-                <Cart product={product} user={user} price={price} amount={amount} />
-                <Dropdown prices={product.prices} price={price} setPrice={setPrice} />
                 <p className=" text-sm font-light">{product.description} </p>
 
-                <div className="flex flex-row">
+                {/* <Like productId={product.id} user={user} />  im not sure this should be there*/}
+                <div className="my-4 flex flex-row">
+                    <Dropdown prices={product.prices} price={price} setPrice={setPrice} />
+
                     <Amount amount={amount} setAmount={setAmount} />
                 </div>
+
+                <Cart product={product} user={user} price={price} amount={amount} />
             </div>
             <Reviews product={product} />
             <WriteReview product={product} user={user} />

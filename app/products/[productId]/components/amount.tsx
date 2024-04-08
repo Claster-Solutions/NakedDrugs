@@ -17,13 +17,11 @@ const Amount = (p: Props) => {
     }
 
     return (
-        <div className="felx-row m-2 flex">
+        <div className=" mx-6 flex h-10 w-10 flex-row items-center  justify-evenly">
             <button className="text-lg font-medium" onClick={minusClickHandlerer}>
                 -
             </button>
-            <div className="mx-2 rounded-lg border-2 border-solid p-2 text-lg ">
-                {p.amount}
-            </div>
+            <div className="mx-2 rounded-lg border-2 border-solid p-2 px-2 text-lg ">{p.amount}</div>
             <button className="text-lg font-medium" onClick={plusClickHandlerer}>
                 +
             </button>
