@@ -18,12 +18,12 @@ function Desktop() {
                         Hodně muziky za málo peněz. Zkuste náš Zelený Kratom.
                     </h2>
                 </div>
-                <Link
+                <div
                     className="bg-primary-hades-main ml-0 flex h-10 w-3/12 items-center justify-center rounded text-white"
-                    href={'/products'}
+                    // href={'/products'}
                 >
                     <p className="font-light">Koupit</p>
-                </Link>
+                </div>
             </div>
             <img className="w-6/12 rounded-lg object-cover" src={ProductImage.src} alt="banner kratom vesmír"></img>
         </Link>
