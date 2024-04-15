@@ -15,7 +15,23 @@ type BlogEvent = {
 type AllProducts = {
     products: Product[]
 }
+type AllUsers = {
+    users: User[]
+}
 
+type User = {
+    id: string
+    email: string
+    name: string
+    photoURL: string
+    liked: string[]
+    referals: string[]
+    referal: string
+    purchasesCount: number
+    cart: cartItem[]
+    orders: Order[]
+    invoiceData: Invoice?
+}
 type Product = {
     id: string
     name: string

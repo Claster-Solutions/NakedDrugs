@@ -12,6 +12,7 @@ import {
     limit,
     deleteDoc,
     where,
+    query,
 } from 'firebase/firestore'
 
 const getUser = async (uid: string): Promise<User | null> => {
@@ -190,6 +191,44 @@ const updateUserOrders = async (uid: string, orders: Order[]): Promise<void> => 
 const updateUserInvoiceData = async (uid: string, invoiceData: Invoice): Promise<void> => {
     await updateDoc(doc(usersCollection, uid), { invoiceData })
 }
+const getAllUsers = async (): Promise<User[]> => {
+    const snap = await getDocs(usersCollection)
+    return snap.docs.map((doc) => map.user(doc)).filter(Boolean)
+}
+
+const getAllUsersByOrders = async (): Promise<Order[]> => {
+    const orders: Order[] = []
+    const users = await getAllUsers()
+    users.forEach((user) => {
+        user.orders.forEach((order) => {
+            if (order.state === 'paid') {
+                orders.push(order)
+            }
+        })
+    })
+    return orders
+}
+
+const getAllUsersByAdminOrders = async (): Promise<AdminOrder[]> => {
+    const orders: AdminOrder[] = []
+    const users = await getAllUsers()
+    users.forEach((user) => {
+        user.orders.forEach((order) => {
+            if (order.state === 'paid') {
+                orders.push({ userId: user.id, order: [order] })
+            }
+        })
+    })
+    console.log(orders)
+    return orders
+}
+const getAllOrdersFromUser = async (uid: string): Promise<Order[]> => {
+    const user = await getUser(uid)
+    return user?.orders || []
+}
+// const updateUsersOrderState = async (uid: string, order: Order): Promise<void> => {
+//     await updateDoc(doc(usersCollection, uid), {}
+// }
 
 const fb = {
     updateUserOrders,
@@ -213,5 +252,9 @@ const fb = {
     updateProduct,
     updateUserInvoiceData,
     getProductsByCategory,
+    getAllUsers,
+    getAllUsersByOrders,
+    getAllUsersByAdminOrders,
+    getAllOrdersFromUser,
 }
 export default fb
