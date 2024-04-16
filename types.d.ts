@@ -32,8 +32,8 @@ interface Order {
     note: string
 }
 interface AdminOrder {
-    userId: string
-    order: Order[]
+    user: User
+    order: Order
 }
 
 interface Invoice {

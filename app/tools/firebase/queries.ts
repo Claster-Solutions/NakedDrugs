@@ -215,7 +215,7 @@ const getAllUsersByAdminOrders = async (): Promise<AdminOrder[]> => {
     users.forEach((user) => {
         user.orders.forEach((order) => {
             if (order.state === 'paid') {
-                orders.push({ userId: user.id, order: [order] })
+                orders.push({ user: user, order: order })
             }
         })
     })
