@@ -31,6 +31,10 @@ interface Order {
     deliveryAddress: string
     note: string
 }
+interface AdminOrder {
+    user: User
+    order: Order
+}
 
 interface Invoice {
     name: string
