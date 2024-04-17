@@ -8,21 +8,6 @@ const handleOrderDone = async (p: Props) => {
     const user = p.order.user
     user.orders[p.index].state = 'shipped'
     await fb.updateUserOrders(user.id, user.orders)
-
-    // try {
-    //     const order = await fb.getAllOrdersFromUser(uid)
-    //     for (let i = 0; i < order.length; i++) {
-    //         if (order[i].id === p.order.order.id) {
-    //             order[i].state = 'shipped'
-    //         }
-    //     }
-
-    //     console.log(order)
-    //     await fb.updateUserOrders(uid, order)
-    //     alert('Order done')
-    // } catch (e) {
-    //     console.log(e)
-    // }
 }
 const OrderCard = (p: Props) => {
     return (
@@ -61,28 +46,6 @@ const OrderCard = (p: Props) => {
                         poznámka: <strong>{p.order.order.note}</strong>
                     </p>
                 </div>
-
-                {/* {p.order.order.map((item, index) => {
-                    return (
-                        <div>
-                            {item.items.map((item, index) => {
-                                return (
-                                    <div>
-                                        <p>{item.productName}</p>
-
-                                        <p>
-                                            hmotnost: <strong>{item.price.volume}</strong>
-                                        </p>
-                                        <p>
-                                            počet kusů: <strong>{item.amount}</strong>
-                                        </p>
-                                        <p>{p.order.order[index].state}</p>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )
-                })} */}
             </div>
             <button
                 className="flex h-8 w-24 items-center justify-center rounded-lg bg-hades-main text-white"

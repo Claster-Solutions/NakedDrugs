@@ -5,17 +5,13 @@ import { useEffect, useState } from 'react'
 import OrderCard from './components/order'
 
 const ObjectRoot = () => {
-    const [orders, setOrders] = useState<AdminOrder[]>([]) //all users might be right
+    const [orders, setOrders] = useState<AdminOrder[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const categoriesData = await fb.getAllUsersByAdminOrders()
-                // console.log(categoriesData)
-                // if (categoriesData.orders === null) {
-                //     // Add an argument to the element access expression
-                //     return
-                // }
+                const categoriesData = await fb.getAllUsersWithOrder()
+
                 setOrders(categoriesData)
             } catch (err) {
                 console.log(err)
@@ -30,12 +26,7 @@ const ObjectRoot = () => {
             <h1 className=" text-primary-blue text-5xl font-semibold uppercase">Orders</h1>
 
             {orders.map((order, index) => (
-                // <div key={index}>
-                //     {order.id}
-                //     {order.state}
-                // </div>
                 <OrderCard order={order} key={index} index={index} />
-                // <DropDownYear category={category} key={index} index={index} />
             ))}
             <div className="sup h-20" />
         </div>
