@@ -14,7 +14,7 @@ export default async function Nabar() {
             <ContentWrapper
                 id="navbar"
                 type="default"
-                tags="w-screen fixed right-0 top-0 shadow-md transition-all duration-750 ease-in-out bg-white"
+                tags="w-screen fixed right-0 top-0 shadow-md transition-all duration-750 z-10 ease-in-out bg-white"
             >
                 <NavbarPC />
                 <NavbarMobile />
@@ -29,7 +29,7 @@ const NavbarPC = async () => {
     const products = await fb.getAllProducts()
 
     return (
-        <div className="hidden h-16 w-full items-center justify-between md:flex">
+        <div className="hidden h-16 w-full items-center  justify-between md:flex">
             <div className="flex h-full w-6/12 items-center gap-10">
                 <Link href={'/'} className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-full bg-black" />

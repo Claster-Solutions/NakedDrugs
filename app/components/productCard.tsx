@@ -4,22 +4,37 @@ import starYellow from '@/public/icons/star_yellow.svg'
 import starGray from '@/public/icons/star_gray.svg'
 import greyHeart from '@/public/icons/rating_heart_gray.svg'
 import redHeart from '@/public/icons/rating_heart_red.svg'
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import fb from '@/app/tools/firebase/queries'
+import { auth } from '../tools/firebase/main'
 interface Props {
     product: Product
 }
 
 export default function ProductCard(p: Props) {
-    const [user, setUser] = useState<User | null>(null)
     const averageRate = p.product.reviews.reduce((acc, review) => acc + review.rate, 0) / p.product.reviews.length
     const [isLiked, setIsLiked] = useState(false)
 
     const starArr = []
+    //  useEffect(() => {
+    //      const fetchData = async () => {
+    //          try {
+    //              const user = await auth.currentUser
 
-    const handleLikeButton = () => {
+    //          } catch (err) {
+    //              console.log(err)
+    //          }
+    //          console.log(orders)
+    //      }
+    //      fetchData()
+    //  }, [])
+
+    const handleLikeButton = async (p: Props) => {
+        const user = await auth.currentUser
+
+        console.log(p.product.id, user?.uid)
         if (!isLiked) {
-            fb.toggleUserLike(user?.id || '', p.product.id)
+            fb.toggleUserLike(user?.uid || '', p.product.id)
         }
         setIsLiked(!isLiked)
     }
@@ -45,7 +60,7 @@ export default function ProductCard(p: Props) {
                     <p>{p.product.prices[0].price}</p>
                 </Link>
                 <div className="flex flex-col items-center gap-0 pr-0">
-                    <button onClick={handleLikeButton} className="w-10 p-2">
+                    <button onClick={() => handleLikeButton(p)} className="w-10 p-2">
                         {isLiked ? (
                             <img src={redHeart.src} alt="red heart" />
                         ) : (

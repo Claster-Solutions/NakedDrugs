@@ -27,7 +27,6 @@ const ObjectRoot = () => {
             </Link>
             {blogs.map((blog, index) => (
                 <div key={index}>{blog.categoryName}</div>
-                // <DropDownYear category={category} key={index} index={index} />
             ))}
             <div className="sup h-20" />
         </div>

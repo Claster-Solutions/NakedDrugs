@@ -14,16 +14,8 @@ const ObjectContentFormatter = (p: Props) => {
             {p.object.content.map((_, index) => {
                 return (
                     <div key={index}>
-                        <ContentItem
-                            index={index}
-                            actionEvent={p.object}
-                            setActionEvent={p.setObject}
-                        />
-                        <ContentItemController
-                            index={index}
-                            actionEvent={p.object}
-                            setActionEvent={p.setObject}
-                        />
+                        <ContentItem index={index} actionEvent={p.object} setActionEvent={p.setObject} />
+                        <ContentItemController index={index} actionEvent={p.object} setActionEvent={p.setObject} />
                     </div>
                 )
             })}
@@ -148,15 +140,15 @@ const items: Item[] = [
             text: '',
         },
     },
-    {
-        title: 'obrázek',
-        type: 300,
-        newItem: {
-            type: 300,
-            id: '',
-            alt: '',
-        },
-    },
+    // {
+    //     title: 'obrázek',
+    //     type: 300,
+    //     newItem: {
+    //         type: 300,
+    //         id: '',
+    //         alt: '',
+    //     },
+    // },
     // {
     //     title: 'sada obrázků',
     //     type: 301,
@@ -214,22 +206,16 @@ const ContentItem = (p: ContentItemProps) => {
         //     )
 
         case 200:
-            return (
-                <Paragraph
-                    index={p.index}
-                    object={p.actionEvent}
-                    setObject={p.setActionEvent}
-                />
-            )
+            return <Paragraph index={p.index} object={p.actionEvent} setObject={p.setActionEvent} />
 
-        case 300:
-            return (
-                <Image
-                    index={p.index}
-                    object={p.actionEvent}
-                    setObject={p.setActionEvent}
-                />
-            )
+        // case 300:
+        //     return (
+        //         <Image
+        //             index={p.index}
+        //             object={p.actionEvent}
+        //             setObject={p.setActionEvent}
+        //         />
+        //     )
 
         // case 301:
         //     return (
@@ -250,13 +236,7 @@ const ContentItem = (p: ContentItemProps) => {
         //     )
 
         case 401:
-            return (
-                <List
-                    index={p.index}
-                    object={p.actionEvent}
-                    setObject={p.setActionEvent}
-                />
-            )
+            return <List index={p.index} object={p.actionEvent} setObject={p.setActionEvent} />
 
         //* Add new content type here
     }

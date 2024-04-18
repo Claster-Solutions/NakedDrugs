@@ -12,7 +12,7 @@ export default function Burger() {
     const handleMouseLeave = () => {
         setTimeout(() => {
             setIsOpen(false)
-        }, 200)
+        }, 300)
     }
 
     return (
@@ -22,34 +22,42 @@ export default function Burger() {
             </div>
 
             <div
-                className={`absolute mt-16 w-48 shadow-custom duration-200 ${
+                className={`absolute mt-16 w-48 shadow-custom duration-300 ${
                     isOpen ? 'max-h-screen' : 'pointer-events-none max-h-0 opacity-0'
                 }`}
                 onMouseLeave={handleMouseLeave}
             >
                 <div className="flex flex-col rounded bg-white shadow-custom">
                     <Link
+                        href={'/products'}
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
+                    >
+                        <img src={'/icons/tray-stacked.svg'} className="h-6 w-6 rounded-full" />
+                        <p>Products</p>
+                    </Link>
+                    <div className="h-[1px] w-full bg-hades-light" />
+                    <Link
                         href={'/blog'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src={'/icons/house.svg'} className="h-6 w-6 rounded-full" />
-                        <p>Our Blog</p>
+                        <p>Blog</p>
                     </Link>
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
 
                     <Link
                         href={'/contact'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/cooperation.svg" className="h-6 w-6" />
-                        <p>Cooperation</p>
+                        <p>Contact</p>
                     </Link>
 
-                    <div className="bg-hades-light h-[1px] w-full" />
+                    <div className="h-[1px] w-full bg-hades-light" />
 
                     <Link
                         href={'/about'}
-                        className="hover:bg-hades-light flex items-center gap-3 rounded p-3 duration-0"
+                        className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/about.svg" className="h-6 w-6" />
                         <p>About Us</p>

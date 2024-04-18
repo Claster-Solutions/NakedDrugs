@@ -172,6 +172,7 @@ const addNewProduct = async (product: Product): Promise<void> => {
 const toggleUserLike = async (uid: string, productId: string): Promise<void> => {
     const user = await getUser(uid)
     if (user === null) return
+    if (uid === '') return
 
     const newLiked = user.liked.includes(productId)
         ? user.liked.filter((id) => id !== productId)
