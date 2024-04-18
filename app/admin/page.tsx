@@ -1,4 +1,4 @@
-import { clasterConfig } from '@/claster-confing'
+import clasterConfig from '@/claster-confing'
 import ContentWrapper from '../components/contentWrapper'
 import Footer from '../components/footer/footer'
 import Navbar from '../components/navbar/navbar'

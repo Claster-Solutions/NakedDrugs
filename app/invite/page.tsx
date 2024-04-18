@@ -7,8 +7,8 @@ import fb from '../tools/firebase/queries'
 import { auth } from '../tools/firebase/main'
 
 export default function Page() {
-    const [invitor, setInvitor] = useState<User | null>()
-    const [invitorError, setInvitorError] = useState<boolean | null>(null)
+    const [invitor, setInviter] = useState<User | null>()
+    const [invitorError, setInviterError] = useState<boolean | null>(null)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -24,17 +24,17 @@ export default function Page() {
             const urlParams = new URLSearchParams(window.location.search)
             const userId = urlParams.get('user')
             if (!userId) {
-                setInvitorError(true)
+                setInviterError(true)
                 return
             }
 
             const user = await fb.getUser(userId)
             if (!user) {
-                setInvitorError(true)
+                setInviterError(true)
                 return
             }
 
-            setInvitor(user)
+            setInviter(user)
         }
 
         fetchUser()
@@ -47,7 +47,7 @@ export default function Page() {
         }
 
         if (!invitor) {
-            setInvitorError(true)
+            setInviterError(true)
             return
         }
 
@@ -80,7 +80,7 @@ export default function Page() {
 
     const handleGoogleSignIn = () => {
         if (!invitor) {
-            setInvitorError(true)
+            setInviterError(true)
             return
         }
 
@@ -138,7 +138,7 @@ export default function Page() {
 
                     <button
                         disabled={invitorError ? true : false}
-                        className="bg-hades-main h-10 rounded text-white disabled:opacity-30"
+                        className="h-10 rounded bg-hades-main text-white disabled:opacity-30"
                         onClick={handleSubmit}
                     >
                         Sign up
@@ -146,7 +146,7 @@ export default function Page() {
                     <button
                         disabled={invitorError ? true : false}
                         onClick={handleGoogleSignIn}
-                        className="border-hades-main flex h-10 items-center justify-center gap-2 rounded border-2 border-solid disabled:opacity-30"
+                        className="flex h-10 items-center justify-center gap-2 rounded border-2 border-solid border-hades-main disabled:opacity-30"
                     >
                         <img src="/icons/google.svg" className="w-6" />
                         <p>Sign up with Google</p>

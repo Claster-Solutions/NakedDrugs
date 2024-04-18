@@ -3,7 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../tools/firebase/main'
 import fb from '../tools/firebase/queries'
-import { v4 } from 'uuid'
+import { v4, validate } from 'uuid'
 import Script from 'next/script'
 import PacketaWidget from './packetaWidget'
 
@@ -119,6 +119,20 @@ export default function Page() {
             setUser({ ...user, invoiceData })
             await fb.updateUserInvoiceData(user.id, invoiceData)
         }
+
+        const emailData = [
+            {
+                key: 'Purchase confirmation',
+                value: `You have purchased ${user.cart.length} items`,
+            },
+        ]
+
+        const emailRecipient = {
+            name: user.name,
+            email: user.email,
+        }
+
+        fb.sendEmail(emailData, emailRecipient)
 
         //redirect to tahank you page
         window.location.href = `/thank-you`

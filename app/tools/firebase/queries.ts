@@ -13,6 +13,7 @@ import {
     deleteDoc,
     where,
 } from 'firebase/firestore'
+import clasterConfig from '@/claster-confing'
 
 const getUser = async (uid: string): Promise<User | null> => {
     const snap = await getDoc(doc(usersCollection, uid))
@@ -191,7 +192,23 @@ const updateUserInvoiceData = async (uid: string, invoiceData: Invoice): Promise
     await updateDoc(doc(usersCollection, uid), { invoiceData })
 }
 
+const sendEmail = async (data: { key: string, value: string }[], recipients: { name: string, email: string }): Promise<boolean> => {
+    const res = await fetch(`${clasterConfig.websiteRootUrl}/api/email`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            websiteRootUrl: clasterConfig.websiteRootUrl,
+            recipients: clasterConfig.emailRecipients,
+            data: data,
+        }),
+    })
+    return res.status === 200
+}
+
 const fb = {
+    sendEmail,
     updateUserOrders,
     getImage,
     getUser,
