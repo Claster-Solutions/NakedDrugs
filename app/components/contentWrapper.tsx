@@ -19,7 +19,7 @@ export default function ContentWrapper(p: Props) {
 const getStyle = (type: string) => {
     switch (type) {
         case 'none':
-            return ''
+            return 'min-h-[70vh]'
         case 'default':
             return 'px-6 md:px-28'
         case 'article':

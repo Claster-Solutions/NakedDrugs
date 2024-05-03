@@ -68,7 +68,7 @@ export default function User() {
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src={'/icons/user.svg'} className="h-6 w-6 rounded-full" />
-                        <p>My Profile</p>
+                        <p>Profil</p>
                     </Link>
                     <div className="h-[1px] w-full bg-hades-light" />
 
@@ -77,7 +77,7 @@ export default function User() {
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/orders.svg" className="h-6 w-6" />
-                        <p>My Orders</p>
+                        <p>Moje Objednávky</p>
                     </Link>
 
                     <div className="h-[1px] w-full bg-hades-light" />
@@ -86,7 +86,7 @@ export default function User() {
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/heart.svg" className="h-6 w-6" />
-                        <p>My Liked</p>
+                        <p>Oblíbené</p>
                     </Link>
                     <div className="h-[1px] w-full bg-hades-light" />
                     <Link
@@ -94,15 +94,15 @@ export default function User() {
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/cart.svg" className="h-6 w-6" />
-                        <p>My Cart</p>
+                        <p>Košík</p>
                     </Link>
                     <div className="h-[1px] w-full bg-hades-light" />
                     <Link
-                        href={'/logout'}
+                        href={'/log-out'}
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/logout.svg" className="h-6 w-6" />
-                        <p>Logout</p>
+                        <p>Odhlásit se</p>
                     </Link>
                 </div>
             </div>

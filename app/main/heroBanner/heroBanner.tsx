@@ -11,17 +11,14 @@ export default HeroBanner
 
 function Desktop() {
     return (
-        <Link href={'/products/KratomBlue'} className=" hidden items-center justify-between gap-4 py-16 md:flex">
+        <Link href={'/products/KratomBlue'} className="group hidden items-center justify-between gap-4 py-16  md:flex">
             <div className=" flex w-1/2 flex-col">
                 <div className="flex items-center">
-                    <h2 className="rounded-xl pb-4 text-4xl font-bold tracking-wide text-black">
+                    <h2 className=" rounded-xl pb-4 text-4xl font-bold tracking-wide text-hades-main delay-200 duration-200 ease-in-out group-hover:text-black">
                         Hodně muziky za málo peněz. Zkuste náš Zelený Kratom.
                     </h2>
                 </div>
-                <div
-                    className="bg-primary-hades-main ml-0 flex h-10 w-3/12 items-center justify-center rounded text-white"
-                    // href={'/products'}
-                >
+                <div className="bg-primary-hades-main ml-0 flex h-10 w-3/12 items-center justify-center rounded text-white">
                     <p className="font-light">Koupit</p>
                 </div>
             </div>

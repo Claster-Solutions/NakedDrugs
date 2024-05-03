@@ -122,11 +122,21 @@ const getProduct = async (id: string): Promise<Product> => {
     }
     return mapped
 }
-
 const getAllProducts = async (): Promise<Product[]> => {
     const snap = await getDocs(productCollection)
 
     return snap.docs.map((doc) => map.product(doc)).filter(Boolean)
+}
+
+const getAllUsersLikedProducts = async (uid: string): Promise<Product[]> => {
+    const user = await getUser(uid)
+    const products: Product[] = []
+    if (user === null) return []
+    for (const productId of user.liked) {
+        const product = await getProduct(productId)
+        products.push(product)
+    }
+    return products
 }
 const setProduct = async (product: Product): Promise<void> => {
     await setDoc(doc(productCollection, product.id), product)
@@ -225,6 +235,7 @@ const fb = {
     getProduct,
     setProduct,
     deleteProduct,
+    getAllUsersLikedProducts,
     setImage,
     getAllProducts,
     addNewProduct,

@@ -18,9 +18,7 @@ export default function Blogcard(p: Props) {
                 <img className="h-full w-auto object-contain" src={image.src}></img>
             </div>
             <div className=" ml-4 flex w-full flex-col items-start gap-2">
-                <Link href={`/blog/${p.blog.id}`} className="text-2xl font-semibold tracking-wide">
-                    {p.blog.title}
-                </Link>
+                <div className="text-2xl font-semibold tracking-wide">{p.blog.title}</div>
                 <div className="m-0 flex flex-col ">
                     <p>{`${p.blog.description.substring(0, 100)}...`} </p>
 

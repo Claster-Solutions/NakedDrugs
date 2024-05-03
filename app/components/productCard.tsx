@@ -16,18 +16,6 @@ export default function ProductCard(p: Props) {
     const [isLiked, setIsLiked] = useState(false)
 
     const starArr = []
-    //  useEffect(() => {
-    //      const fetchData = async () => {
-    //          try {
-    //              const user = await auth.currentUser
-
-    //          } catch (err) {
-    //              console.log(err)
-    //          }
-    //          console.log(orders)
-    //      }
-    //      fetchData()
-    //  }, [])
 
     const handleLikeButton = async (p: Props) => {
         const user = await auth.currentUser

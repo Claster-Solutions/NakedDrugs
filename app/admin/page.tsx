@@ -38,6 +38,9 @@ export default function Page() {
                 <Link href="/admin/products" className="text-xl underline">
                     Products
                 </Link>
+                <Link href="/admin/orders" className="text-xl underline">
+                    Orders
+                </Link>
 
                 <div className="flex flex-col">
                     <p className="f2 font-medium">Kontakt</p>
