@@ -10,10 +10,12 @@ export default function User() {
     const [userName, setUserName] = useState<string | null>(null)
     const [userPhoto, setUserPhoto] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
+    const [login, setLogIn] = useState<string>('log-in')
 
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
+                setLogIn('log-out')
                 const userData = await fb.getUser(user.uid)
                 if (!userData) return
 
@@ -98,11 +100,11 @@ export default function User() {
                     </Link>
                     <div className="h-[1px] w-full bg-hades-light" />
                     <Link
-                        href={'/log-out'}
+                        href={`/${login}`}
                         className="flex items-center gap-3 rounded p-3 duration-0 hover:bg-hades-light"
                     >
                         <img src="/icons/logout.svg" className="h-6 w-6" />
-                        <p>Odhlásit se</p>
+                        <p>{login}</p>
                     </Link>
                 </div>
             </div>
