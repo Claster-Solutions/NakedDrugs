@@ -7,26 +7,19 @@ interface Props {
 }
 
 export default function Pay(p: Props) {
+    const [done, setDone] = React.useState(false)
     const dropinContainerRef = useRef<HTMLDivElement>(null)
 
     const configuration = {
         environment: 'test',
-        clientKey: 'test_GWTQ34MH5BGFFI7BHPK7KRR7OILIYPUH', // Public key used for client-side authentication: https://docs.adyen.com/development-resources/client-side-authentication
+        clientKey: 'test_DN4AG7OZKRGSZHXTB7FRUVXWAUELRWB2', // Public key used for client-side authentication: https://docs.adyen.com/development-resources/client-side-authentication
         session: p.session,
         onPaymentCompleted: (result: any, component: any) => {
-            console.info(result, component)
+            console.log(result, component)
+            setDone(true)
         },
         onError: (error: any, component: any) => {
             console.error(error.name, error.message, error.stack, component)
-        },
-        // Any payment method specific configuration. Find the configuration specific to each payment method:  https://docs.adyen.com/payment-methods
-        // For example, this is 3D Secure configuration for cards:
-        paymentMethodsConfiguration: {
-            card: {
-                hasHolderName: true,
-                holderNameRequired: true,
-                billingAddressRequired: true,
-            },
         },
     }
 
@@ -36,11 +29,15 @@ export default function Pay(p: Props) {
             const checkout = await AdyenCheckout(configuration)
 
             // Create an instance of Drop-in and mount it to the container you created.
-            const dropinComponent = checkout.create('dropin').mount('#dropin-container')
+
+            if (dropinContainerRef.current) {
+                console.log('checkout:', checkout)
+                const dropinComponent = checkout.create('dropin').mount(dropinContainerRef.current as HTMLElement)
+            }
         }
 
         func()
-    }, [])
+    }, [dropinContainerRef])
 
     return (
         <div>
@@ -51,7 +48,7 @@ export default function Pay(p: Props) {
             >
                 Show
             </button>
-            <div className="h-[40vh] w-full bg-red" id="dropin-container" ref={dropinContainerRef}></div>
+            {done ? <h1>Done</h1> : <div className="w-4/12" id="dropin-container" ref={dropinContainerRef}></div>}
         </div>
     )
 }

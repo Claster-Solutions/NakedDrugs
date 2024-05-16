@@ -106,6 +106,7 @@ export default function Form() {
             note,
             deliveryAddress,
             invoice: invoiceData,
+            sessionId: null,
         }
 
         const newOrders = user.orders.concat(newOrder)
@@ -120,7 +121,7 @@ export default function Form() {
         }
 
         //redirect to tahank you page
-        window.location.href = `/thank-you`
+        window.location.href = `/pay-wall?orderId=${newOrder.id}`
     }
 
     return (

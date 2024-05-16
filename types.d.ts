@@ -30,6 +30,7 @@ interface Order {
     invoice: Invoice
     deliveryAddress: string
     note: string
+    sessionId: string | null
 }
 interface AdminOrder {
     user: User

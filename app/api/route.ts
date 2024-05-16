@@ -1,7 +1,7 @@
 import { Client, CheckoutAPI } from '@adyen/api-library'
 import { v4 } from 'uuid';
 
-const client = new Client({ apiKey: "AQEihmfuXNWTK0Qc+iSTnmUrs+GJx2A2HxN63GezYRZx1U/zBhDBXVsNvuR83LVYjEgiTGAH-C5IPEHHPctvptKk6c8NuI/dFjq5uItmU443K2ewkluU=-Q6x$*_s%FBstxHS5", environment: "TEST" });
+const client = new Client({ apiKey: "AQEphmfxLInKaRxKw0m/n3Q5qf3Va4dMHodPSnQoUArwOK/CMHxgnBqymvYQwV1bDb7kfNy1WIxIIkxgBw==-rpcH9RJJtEuqwGk6zhRVCCM1r1WoCKILxV56jTF5oho=-k;T%DpYUY$9{h&v<", environment: "TEST" });
 export async function GET(request: Request) {
     const createCheckoutSessionRequest = {
         merchantAccount: "ClasterECOM",
